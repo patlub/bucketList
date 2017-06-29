@@ -1,4 +1,7 @@
+
+
 body{
+    font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     background: url("../../images/m1.png");
     background-size: 100% auto;
     background-repeat: no-repeat;
@@ -20,4 +23,33 @@ body{
     font-size: 200%;
     color: #ffffff;
     margin-top: 4%;
+}
+
+#sign-up-box {
+    float: right;
+    margin-right: 3%;
+}
+
+.text-box {
+    width: 100%;
+    margin-top: 6%;
+    height: 35px;
+    background: transparent;
+    border: 3px solid lightgrey;
+    font-size: 150%;
+    color: #fff9f6;
+}
+
+#start-tracking-btn {
+    color: #000000;
+    background-color: #ffffff;
+}
+
+#sign-in-text {
+    color: #ffffff;
+    margin-top: 2%;
+}
+#sign-in-text a {
+    color: #ffffff;
+    text-decoration: underline;
 }
