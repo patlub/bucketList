@@ -1,0 +1,23 @@
+body{
+    background: url("../../images/m1.png");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+}
+
+#main-heading {
+    color: #ffffff;
+    font-size: 450%;
+}
+
+#sub-heading {
+    margin-top: 2%;
+    font-size: 300%;
+    color: lightgrey;
+    margin-right: 3%;
+}
+
+#sign-up-text {
+    font-size: 200%;
+    color: #ffffff;
+    margin-top: 4%;
+}
