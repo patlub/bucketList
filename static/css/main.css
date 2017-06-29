@@ -53,3 +53,10 @@ body{
     color: #ffffff;
     text-decoration: underline;
 }
+
+#sign-in-head-text {
+    font-size: 200%;
+    color: #ffffff;
+    margin-top: 4%;
+    margin-right: 22%;
+}
