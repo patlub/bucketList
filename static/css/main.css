@@ -1,6 +1,5 @@
 
-
-.home-body{
+.home-body {
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     background: url("../../images/m1.png");
     background-size: 100% auto;
@@ -49,6 +48,7 @@
     color: #ffffff;
     margin-top: 2%;
 }
+
 #sign-in-text a {
     color: #ffffff;
     text-decoration: underline;
@@ -65,12 +65,13 @@
     padding-left: 4%;
 }
 
-#create-new-bucket {
-    background-color: green;
+#delete-bucket {
+    background-color: #de0000;
     color: #ffffff;
     font-size: 140%;
     width: 150px;
     margin-top: 7%;
+    font-weight: bold;
 }
 
 .bucket {
@@ -110,4 +111,17 @@
     font-size: 170%;
     color: white;
     padding-left: 25%;
+}
+
+.glyphicon {
+    font-size: 150%;
+    margin-left: 10%;
+}
+
+.glyphicon-pencil {
+    color: blue;
+}
+
+.glyphicon-trash {
+    color: red;
 }
