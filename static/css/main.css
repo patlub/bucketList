@@ -1,6 +1,6 @@
 
 
-body{
+.home-body{
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
     background: url("../../images/m1.png");
     background-size: 100% auto;
@@ -59,4 +59,55 @@ body{
     color: #ffffff;
     margin-top: 4%;
     margin-right: 22%;
+}
+
+#bucket-lists-heading {
+    padding-left: 4%;
+}
+
+#create-new-bucket {
+    background-color: green;
+    color: #ffffff;
+    font-size: 140%;
+    width: 150px;
+    margin-top: 7%;
+}
+
+.bucket {
+    padding-bottom: 6%;
+    background-color: #1BC98E;
+    margin-right: 3%;
+    padding-top: 3%;
+}
+
+#bucket-1 {
+    background-color: #1BC98E;
+}
+
+#bucket-2 {
+    background-color: #E64759;
+}
+
+#bucket-3 {
+    background-color: #9F86FF;
+}
+
+#bucket-4 {
+    background-color: #1BC98E;
+}
+
+#bucket-5 {
+    background-color: orange;
+}
+
+.bucket-label {
+    color: #ffffff;
+    padding-left: 25%;
+    font-weight: bold;
+}
+
+.bucket-name {
+    font-size: 170%;
+    color: white;
+    padding-left: 25%;
 }
