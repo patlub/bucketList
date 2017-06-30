@@ -8,7 +8,7 @@
 
 #main-heading {
     color: #ffffff;
-    font-size: 450%;
+    font-size: 350%;
 }
 
 #sub-heading {
@@ -71,7 +71,14 @@
     font-size: 140%;
     width: 150px;
     margin-top: 7%;
-    font-weight: bold;
+}
+
+#create-bucket {
+    background-color: green;
+    color: #ffffff;
+    font-size: 140%;
+    width: 150px;
+    margin-top: 7%;
 }
 
 .bucket {
@@ -94,7 +101,7 @@
 }
 
 #bucket-4 {
-    background-color: #1BC98E;
+    background-color: purple;
 }
 
 #bucket-5 {
@@ -124,4 +131,32 @@
 
 .glyphicon-trash {
     color: red;
+}
+
+#add-activity-btn {
+    background-color: green;
+    color: #ffffff;
+    font-size: 120%;
+    margin-top: 1%;
+}
+
+.modal-text-box {
+    width: 50%;
+    height: 35px;
+    border: 3px solid lightgrey;
+    font-size: 150%;
+    margin-bottom: 5%;
+}
+
+#create-bucket-btn {
+    width: 50%;
+    height: 35px;
+    font-size: 150%;
+    margin-top: 5%;
+    background-color: green;
+    color: #ffffff;
+}
+
+#image-label {
+    margin-right: 2%;
 }

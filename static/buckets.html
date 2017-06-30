@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>#}
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>MyBucket - buckets</title>
 </head>
 <body>
@@ -12,8 +13,36 @@
     <div class="col-md-12"><h1><strong>MyBucket</strong></h1></div>
     <div class="row">
         <div id="bucket-lists-heading" class="col-md-10"><h2>Bucket Lists</h2></div>
-        <div class="col-md-2"><input type="button" id="delete-bucket" value="Create New"/></div>
+        <div class="col-md-2">
+            <input type="button" id="create-bucket" value="Create New" data-toggle="modal"
+                   data-target="#addBucketModal"/>
+        </div>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="addBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Create new Bucket</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div><input type="text" class="modal-text-box" placeholder="Bucket Name" required></div>
+                        <div style="display: flex;">
+                            <label for="image" id="image-label">Cover Image</label>
+                            <input type="file" name="image" id="image" placeholder="Bucket Name" required>
+                        </div>
+                        <div><input type="submit" id="create-bucket-btn" value="Create Bucket"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="col-md-12">
         <div id="bucket-1" class="col-md-2 bucket">
             <div class="bucket-name">Bucket 1</div>

@@ -5,14 +5,17 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/toggle.css">
-    <script src="js/bootstrap.min.js"></script>
+    {#    <script src="js/bootstrap.min.js"></script>#}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <title>MyBucket - Activities</title>
 </head>
 <body>
 <div class="container-fluid">
     <div class="col-md-12"><h1><strong>MyBucket</strong></h1></div>
     <div class="row">
-        <div id="bucket-lists-heading" class="col-md-10"><h2>Bucket 1</h2></div>
+        <div id="bucket-lists-heading" class="col-md-10"><h2><a href="buckets.html"><em>Buckets</em>git </a> / Bucket 1</h2></div>
         <div class="col-md-2"><input type="button" id="delete-bucket" value="Delete Bucket"/></div>
     </div>
     <div class="col-md-8">
@@ -27,7 +30,7 @@
             </thead>
             <tbody>
             <tr>
-                <td>Activity 1</td>
+                <td><a href="">Activity 1</a></td>
                 <td>20-07-2017</td>
                 <td>
                     <label class="switch">
@@ -36,12 +39,12 @@
                     </label>
                 </td>
                 <td>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
+                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
             <tr>
-                <td>Activity 1</td>
+                <td><a href="">Activity 2</a></td>
                 <td>20-07-2017</td>
                 <td>
                     <label class="switch">
@@ -50,12 +53,12 @@
                     </label>
                 </td>
                 <td>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
+                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
             <tr>
-                <td>Activity 3</td>
+                <td><a href="">Activity 3</a></td>
                 <td>20-07-2017</td>
                 <td>
                     <label class="switch">
@@ -64,12 +67,12 @@
                     </label>
                 </td>
                 <td>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
+                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
             <tr>
-                <td>Activity 4</td>
+                <td><a href="">Activity 4</a></td>
                 <td>20-07-2017</td>
                 <td>
                     <label class="switch">
@@ -78,12 +81,12 @@
                     </label>
                 </td>
                 <td>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
+                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
             </tr>
             <tr>
-                <td>Activity 5</td>
+                <td><a href="">Activity 5</a></td>
                 <td>20-07-2017</td>
                 <td>
                     <label class="switch">
@@ -92,13 +95,37 @@
                     </label>
                 </td>
                 <td>
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    <span class="glyphicon glyphicon-trash"></span>
+                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
                 </td>
+            </tr>
+            <tr>
+                <td colspan="4"><input type="button" id="add-activity-btn" value="Add Activity+" data-toggle="modal"
+                                       data-target="#addActivityModal"></td>
             </tr>
 
             </tbody>
         </table>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Add an Activity</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div><input type="text" class="modal-text-box" placeholder="Activity" required></div>
+                            <div><input type="submit" id="create-bucket-btn" value="Add Activity"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
