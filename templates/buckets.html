@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../static/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
-    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>#}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>MyBucket - buckets</title>
 </head>
@@ -31,13 +31,9 @@
                     <h4 class="modal-title" id="myModalLabel">Create new Bucket</h4>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form method="post" action="http://localhost:5000/create_bucket">
                         <div><input type="text" name="bucket-name" class="modal-text-box"
                                     placeholder="Bucket Name" required></div>
-                        <div style="display: flex;">
-                            <label for="image" id="image-label">Cover Image</label>
-                            <input type="file" name="image" id="image" placeholder="Bucket Name" required>
-                        </div>
                         <div><input type="submit" id="create-bucket-btn" value="Create Bucket"></div>
                     </form>
                 </div>
@@ -45,46 +41,57 @@
         </div>
     </div>
     <div class="col-md-12">
-        <a href="http://localhost:5000/bucket/bucket_name">
-            <div id="bucket-1" class="col-md-2 bucket">
-                <div class="bucket-name">Bucket 1</div>
-                <div class="bucket-label">Activities 5</div>
-                <div class="bucket-label">Achieved 3</div>
-                <div class="bucket-label">Pending 2</div>
-            </div>
-        </a>
-        <a href="http://localhost:5000/bucket/bucket_name">
-            <div id="bucket-2" class="col-md-2 bucket">
-                <div class="bucket-name">Bucket 2</div>
-                <div class="bucket-label">Activities 5</div>
-                <div class="bucket-label">Achieved 3</div>
-                <div class="bucket-label">Pending 2</div>
-            </div>
-        </a>
-        <a href="http://localhost:5000/bucket/bucket_name">
-            <div id="bucket-3" class="col-md-2 bucket">
-                <div class="bucket-name">Bucket 3</div>
-                <div class="bucket-label">Activities 5</div>
-                <div class="bucket-label">Achieved 3</div>
-                <div class="bucket-label">Pending 2</div>
-            </div>
-        </a>
-        <a href="http://localhost:5000/bucket/bucket_name">
-            <div id="bucket-4" class="col-md-2 bucket">
-                <div class="bucket-name">Bucket 4</div>
-                <div class="bucket-label">Activities 5</div>
-                <div class="bucket-label">Achieved 3</div>
-                <div class="bucket-label">Pending 2</div>
-            </div>
-        </a>
-        <a href="http://localhost:5000/bucket/bucket_name">
-            <div id="bucket-5" class="col-md-2 bucket">
-                <div class="bucket-name">Bucket 5</div>
-                <div class="bucket-label">Activities 5</div>
-                <div class="bucket-label">Achieved 3</div>
-                <div class="bucket-label">Pending 2</div>
-            </div>
-        </a>
+        {% for bucket in buckets %}
+            {% set achieved = 0 %}
+            {% set pending = 0 %}
+            <a href="http://localhost:5000/buckets/{{ bucket.name }}">
+                <div id="bucket-1" class="col-md-2 bucket">
+                    <div class="bucket-name">{{ bucket.name }}</div>
+                    {% for activity in bucket.activities %}
+                        {% if activity.status %}
+                            {% set achieved = achieved + 1 %}
+                        {% else %}
+                            {% set pending = pending + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    <div class="bucket-label">Activities {{ bucket.activities|length }}</div>
+                    <div class="bucket-label">Achieved {{ achieved }}</div>
+                    <div class="bucket-label">Pending {{ pending }}</div>
+                </div>
+            </a>
+        {% endfor %}
+        {#        <a href="http://localhost:5000/bucket/bucket_name">#}
+        {#            <div id="bucket-2" class="col-md-2 bucket">#}
+        {#                <div class="bucket-name">Bucket 2</div>#}
+        {#                <div class="bucket-label">Activities 5</div>#}
+        {#                <div class="bucket-label">Achieved 3</div>#}
+        {#                <div class="bucket-label">Pending 2</div>#}
+        {#            </div>#}
+        {#        </a>#}
+        {#        <a href="http://localhost:5000/bucket/bucket_name">#}
+        {#            <div id="bucket-3" class="col-md-2 bucket">#}
+        {#                <div class="bucket-name">Bucket 3</div>#}
+        {#                <div class="bucket-label">Activities 5</div>#}
+        {#                <div class="bucket-label">Achieved 3</div>#}
+        {#                <div class="bucket-label">Pending 2</div>#}
+        {#            </div>#}
+        {#        </a>#}
+        {#        <a href="http://localhost:5000/bucket/bucket_name">#}
+        {#            <div id="bucket-4" class="col-md-2 bucket">#}
+        {#                <div class="bucket-name">Bucket 4</div>#}
+        {#                <div class="bucket-label">Activities 5</div>#}
+        {#                <div class="bucket-label">Achieved 3</div>#}
+        {#                <div class="bucket-label">Pending 2</div>#}
+        {#            </div>#}
+        {#        </a>#}
+        {#        <a href="http://localhost:5000/bucket/bucket_name">#}
+        {#            <div id="bucket-5" class="col-md-2 bucket">#}
+        {#                <div class="bucket-name">Bucket 5</div>#}
+        {#                <div class="bucket-label">Activities 5</div>#}
+        {#                <div class="bucket-label">Achieved 3</div>#}
+        {#                <div class="bucket-label">Pending 2</div>#}
+        {#            </div>#}
+        {#        </a>#}
     </div>
 </div>
 </body>

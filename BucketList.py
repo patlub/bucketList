@@ -4,7 +4,7 @@ from classes.bucket import Bucket
 from classes.activity import Activity
 
 app = Flask(__name__)
-buckets = []
+all_buckets = []
 activities = []
 
 @app.route('/', methods=['POST', 'GET'])
@@ -45,27 +45,29 @@ def sign_out():
 
 @app.route('/buckets')
 def buckets():
-    return render_template('buckets.html')
+    return render_template('buckets.html', buckets=all_buckets, len=len(all_buckets))
 
 
 @app.route('/create_bucket', methods=["POST"])
 def create_bucket():
     bucket_name = request.form['bucket-name']
     new_bucket = Bucket(bucket_name)
-    buckets.append(new_bucket)
+    all_buckets.append(new_bucket)
+    return redirect(url_for('buckets'))
+
 
 @app.route('/create_activity/<string:bucket_name>', methods=['POST'])
 def create_activity(bucket_name):
     activity_name = request.form['activity-name']
     new_activity = Activity(activity_name)
     activities.append(new_activity)
-    for bucket in buckets:
+    for bucket in all_buckets:
         if bucket.name == bucket_name:
             bucket.activities.append(new_activity)
 
-@app.route('/<string:bucket_name>')
+@app.route('/buckets/<string:bucket_name>')
 def activities(bucket_name):
-    return render_template('activities.html')
+    return render_template('activities.html', bucket_name=bucket_name)
 
 
 if __name__ == '__main__':
