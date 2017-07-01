@@ -1,13 +1,13 @@
 
 .home-body {
     font-family: "Roboto", "Lucida Grande", Verdana, Arial, sans-serif;
-    background: url("../../images/m1.png");
+    background: url("../images/m1.png");
     background-size: 100% auto;
     background-repeat: no-repeat;
 }
 
 #main-heading {
-    color: #ffffff;
+    color: #fff9f6;
     font-size: 350%;
 }
 
