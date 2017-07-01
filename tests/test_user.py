@@ -2,9 +2,9 @@ import unittest
 from classes.user import User
 
 
-class MyTestCase(unittest.TestCase):
+class UserCase(unittest.TestCase):
     @classmethod
-    def setUpClass(self):
+    def setUp(self):
         self.user = User()
 
     def test_user_created(self):

@@ -1,8 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from classes.user import User
+from classes.bucket import Bucket
+from classes.activity import Activity
 
 app = Flask(__name__)
-
+buckets = []
+activities = []
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
@@ -44,6 +47,21 @@ def sign_out():
 def buckets():
     return render_template('buckets.html')
 
+
+@app.route('/create_bucket', methods=["POST"])
+def create_bucket():
+    bucket_name = request.form['bucket-name']
+    new_bucket = Bucket(bucket_name)
+    buckets.append(new_bucket)
+
+@app.route('/create_activity/<string:bucket_name>', methods=['POST'])
+def create_activity(bucket_name):
+    activity_name = request.form['activity-name']
+    new_activity = Activity(activity_name)
+    activities.append(new_activity)
+    for bucket in buckets:
+        if bucket.name == bucket_name:
+            bucket.activities.append(new_activity)
 
 @app.route('/<string:bucket_name>')
 def activities(bucket_name):
