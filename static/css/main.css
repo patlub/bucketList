@@ -160,3 +160,7 @@
 #image-label {
     margin-right: 2%;
 }
+
+.error{
+    color: red;
+}

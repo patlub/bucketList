@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+from classes.user import User
 
 app = Flask(__name__)
 
@@ -13,25 +14,30 @@ def sign_up():
     name = request.form['name']
     email = request.form['email']
     password = request.form['password']
-    user = [name, email, password]
-    if user:
-        return render_template('buckets.html', name=name)
+    user = User()
+    user.sign_up(name, email, password)
+    return render_template('buckets.html', name=name)
 
 
 @app.route('/signIn', methods=['POST', 'GET'])
 def sign_in():
-    email = 'patricklu2010@gmail.com'
-    password = 'patrick'
-    name = 'Patrick'
     if request.method == 'POST':
-        if request.form['email'] == email \
-                and request.form['password'] == password:
-            return render_template('buckets.html', name=name)
+        email = request.form['email']
+        password = request.form['password']
+        user = User()
+        if user.sign_in(email, password):
+            return render_template('buckets.html', name=user.name)
         else:
             return render_template('signIn.html',
                                    error='Invalid username or password')
     else:
         return render_template('signIn.html')
+
+
+@app.route('/signOut')
+def sign_out():
+    user = User()
+    user.sign_out()
 
 
 @app.route('/buckets')
