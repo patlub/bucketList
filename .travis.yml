@@ -1,7 +1,15 @@
 language: python
+# vesions
 python:
-  - "3.5"
-  - "3.6"
+  - "3.4"
+cache: pip
+# command to install dependencies
+install:
+  - pip install coveralls
+  - pip install coverage
 # command to run tests
 script:
-  - python tests.py
+  - nosetests --with-coverage
+
+after_success:
+  - coveralls
