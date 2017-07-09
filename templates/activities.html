@@ -20,10 +20,14 @@
         </div>
         <div class="col-md-2">
             <a href="http://localhost:5000/edit_bucket/{{ bucket_name }}">
-                <input type="button" id="edit-bucket-btn" value="Edit Bucket"/>
+                <input type="button" id="e-bucket-btn" value="Edit Bucket"/>
             </a>
         </div>
-        <div class="col-md-2"><input type="button" id="delete-bucket-btn" value="Delete Bucket"/></div>
+        <div class="col-md-2">
+            <a href="http://localhost:5000/del_bucket/{{ bucket_name }}">
+                <input type="button" id="delete-bucket-btn" value="Delete Bucket"/>
+            </a>
+        </div>
     </div>
     <div class="col-md-8">
         <table class="table table-bordered table-striped table-responsive">
@@ -42,13 +46,17 @@
                     <td>20-07-2017</td>
                     <td>
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox">
                             <span class="slider round"></span>
                         </label>
                     </td>
                     <td>
-                        <a href="http://localhost:5000/edit_activity/{{ bucket_name }}/{{ act.name }}"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href=""><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="http://localhost:5000/edit_activity/{{ bucket_name }}/{{ act.name }}">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="http://localhost:5000/del_activity/{{ bucket_name }}/{{ act.name }}">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
                     </td>
                 </tr>
             {% endfor %}

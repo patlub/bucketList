@@ -169,13 +169,12 @@
     color: #ffffff;
 }
 
-#edit-bucket-btn {
-    width: 50%;
-    height: 35px;
-    font-size: 150%;
-    margin-top: 0;
-    background-color: #1b2180;
+#e-bucket-btn {
+    background-color: #0000ff;
     color: #ffffff;
+    font-size: 140%;
+    width: 150px;
+    margin-top: 7%;
 }
 
 #image-label {

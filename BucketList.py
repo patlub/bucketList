@@ -66,7 +66,8 @@ def create_activity(bucket_name):
     for bucket in all_buckets:
         if bucket.name == bucket_name:
             bucket.activities.append(new_activity)
-            return redirect(url_for('activities', bucket_name=bucket_name))
+            return redirect(url_for('activities',
+                                    bucket_name=bucket_name))
 
 
 @app.route('/buckets/<string:bucket_name>')
@@ -93,7 +94,8 @@ def edit_bucket(bucket_name):
                                bucket_name=bucket_name)
 
 
-@app.route('/edit_activity/<string:bucket_name>/<string:activity_name>', methods=['POST', 'GET'])
+@app.route('/edit_activity/<string:bucket_name>/'
+           '<string:activity_name>', methods=['POST', 'GET'])
 def edit_activity(activity_name, bucket_name):
     if request.method == 'POST':
         found_bucket = None
@@ -104,9 +106,34 @@ def edit_activity(activity_name, bucket_name):
         for activity in found_bucket.activities:
             if activity.name == activity_name:
                 activity.name = new_activity_name
-                return redirect(url_for('activities', bucket_name=bucket_name))
+                return redirect(url_for('activities',
+                                        bucket_name=bucket_name))
     else:
-        return render_template('edit-activity.html', bucket_name=bucket_name, activity_name=activity_name)
+        return render_template('edit-activity.html',
+                               bucket_name=bucket_name,
+                               activity_name=activity_name)
+
+
+@app.route('/del_bucket/<string:bucket_name>')
+def delete_bucket(bucket_name):
+    for bucket in all_buckets:
+        if bucket.name == bucket_name:
+            all_buckets.remove(bucket)
+            return redirect(url_for('buckets'))
+
+
+@app.route('/del_activity/<string:bucket_name>/'
+           '<string:activity_name>')
+def del_activity(activity_name, bucket_name):
+    found_bucket = None
+    for bucket in all_buckets:
+        if bucket.name == bucket_name:
+            found_bucket = bucket
+    for activity in found_bucket.activities:
+        if activity.name == activity_name:
+            found_bucket.activities.remove(activity)
+            return redirect(url_for('activities',
+                                    bucket_name=bucket_name))
 
 
 if __name__ == '__main__':
