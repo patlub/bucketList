@@ -79,18 +79,34 @@ def activities(bucket_name):
                                    bucket_acts=bucket_activities)
 
 
-@app.route('/edit_bucket/<string:old_bucket_name>', methods=['POST', 'GET'])
-def edit_bucket(old_bucket_name):
+@app.route('/edit_bucket/<bucket_name>', methods=['POST', 'GET'])
+def edit_bucket(bucket_name):
     if request.method == 'POST':
         new_bucket_name = request.form['bucket-name']
         for bucket in all_buckets:
-            if bucket.name == old_bucket_name:
+            if bucket.name == bucket_name:
                 bucket.name = new_bucket_name
                 return redirect(url_for('activities',
                                         bucket_name=new_bucket_name))
     else:
         return render_template('edit-bucket.html',
-                               bucket_name=old_bucket_name)
+                               bucket_name=bucket_name)
+
+
+@app.route('/edit_activity/<string:bucket_name>/<string:activity_name>', methods=['POST', 'GET'])
+def edit_activity(activity_name, bucket_name):
+    if request.method == 'POST':
+        found_bucket = None
+        new_activity_name = request.form['activity-name']
+        for bucket in all_buckets:
+            if bucket.name == bucket_name:
+                found_bucket = bucket
+        for activity in found_bucket.activities:
+            if activity.name == activity_name:
+                activity.name = new_activity_name
+                return redirect(url_for('activities', bucket_name=bucket_name))
+    else:
+        return render_template('edit-activity.html', bucket_name=bucket_name, activity_name=activity_name)
 
 
 if __name__ == '__main__':
