@@ -18,7 +18,11 @@
         <div id="bucket-lists-heading" class="col-md-8"><h2>
             <a href="http://localhost:5000/buckets"><em>Buckets</em></a> / {{ bucket_name }}</h2>
         </div>
-        <div class="col-md-2"><input type="button" id="edit-bucket-btn" value="Edit Bucket"/></div>
+        <div class="col-md-2">
+            <a href="http://localhost:5000/edit_bucket/{{ bucket_name }}">
+                <input type="button" id="edit-bucket-btn" value="Edit Bucket"/>
+            </a>
+        </div>
         <div class="col-md-2"><input type="button" id="delete-bucket-btn" value="Delete Bucket"/></div>
     </div>
     <div class="col-md-8">

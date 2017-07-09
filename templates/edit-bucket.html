@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/toggle.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <title>MyBucket - Activities</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="col-md-12"><h1><strong>MyBucket</strong></h1></div>
+    <div class="edit-box">
+        <div class="row" id="edit-bucket-heading">
+            <h3>Edit Bucket</h3>
+        </div>
+        <div class="col-md-8">
+            <form method="post" action="http://localhost:5000/edit_bucket/{{ bucket_name }}">
+                <div><input type="text" name="bucket-name" class="modal-text-box"
+                            placeholder="Bucket Name" value="{{ bucket_name }}" required></div>
+                <div><input type="submit" id="edit-bucket-btn" value="Update"></div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

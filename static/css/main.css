@@ -169,10 +169,28 @@
     color: #ffffff;
 }
 
+#edit-bucket-btn {
+    width: 50%;
+    height: 35px;
+    font-size: 150%;
+    margin-top: 0;
+    background-color: #1b2180;
+    color: #ffffff;
+}
+
 #image-label {
     margin-right: 2%;
 }
 
 .error{
     color: red;
+}
+
+#edit-bucket-heading {
+    margin-left: 1%;
+    margin-top: 8%;
+}
+
+.edit-box {
+    margin-left: 2%;
 }

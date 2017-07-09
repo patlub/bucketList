@@ -46,7 +46,8 @@ def sign_out():
 
 @app.route('/buckets')
 def buckets():
-    return render_template('buckets.html', buckets=all_buckets, len=len(all_buckets))
+    return render_template('buckets.html',
+                           buckets=all_buckets, len=len(all_buckets))
 
 
 @app.route('/create_bucket', methods=["POST"])
@@ -73,7 +74,23 @@ def activities(bucket_name):
     for bucket in all_buckets:
         if bucket_name == bucket.name:
             bucket_activities = bucket.activities
-            return render_template('activities.html', bucket_name=bucket_name, bucket_acts=bucket_activities)
+            return render_template('activities.html',
+                                   bucket_name=bucket_name,
+                                   bucket_acts=bucket_activities)
+
+
+@app.route('/edit_bucket/<string:old_bucket_name>', methods=['POST', 'GET'])
+def edit_bucket(old_bucket_name):
+    if request.method == 'POST':
+        new_bucket_name = request.form['bucket-name']
+        for bucket in all_buckets:
+            if bucket.name == old_bucket_name:
+                bucket.name = new_bucket_name
+                return redirect(url_for('activities',
+                                        bucket_name=new_bucket_name))
+    else:
+        return render_template('edit-bucket.html',
+                               bucket_name=old_bucket_name)
 
 
 if __name__ == '__main__':
