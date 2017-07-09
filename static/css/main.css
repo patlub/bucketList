@@ -65,8 +65,16 @@
     padding-left: 4%;
 }
 
-#delete-bucket {
+#delete-bucket-btn {
     background-color: #de0000;
+    color: #ffffff;
+    font-size: 140%;
+    width: 150px;
+    margin-top: 7%;
+}
+
+#edit-bucket-btn {
+    background-color: #0000ff;
     color: #ffffff;
     font-size: 140%;
     width: 150px;

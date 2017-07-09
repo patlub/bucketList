@@ -15,9 +15,11 @@
 <div class="container-fluid">
     <div class="col-md-12"><h1><strong>MyBucket</strong></h1></div>
     <div class="row">
-        <div id="bucket-lists-heading" class="col-md-10"><h2>
-            <a href="http://localhost:5000/buckets"><em>Buckets</em></a> / {{ bucket_name }}</h2></div>
-        <div class="col-md-2"><input type="button" id="delete-bucket" value="Delete Bucket"/></div>
+        <div id="bucket-lists-heading" class="col-md-8"><h2>
+            <a href="http://localhost:5000/buckets"><em>Buckets</em></a> / {{ bucket_name }}</h2>
+        </div>
+        <div class="col-md-2"><input type="button" id="edit-bucket-btn" value="Edit Bucket"/></div>
+        <div class="col-md-2"><input type="button" id="delete-bucket-btn" value="Delete Bucket"/></div>
     </div>
     <div class="col-md-8">
         <table class="table table-bordered table-striped table-responsive">
@@ -30,76 +32,22 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td><a href="">Activity 1</a></td>
-                <td>20-07-2017</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <span class="slider round"></span>
-                    </label>
-                </td>
-                <td>
-                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="">Activity 2</a></td>
-                <td>20-07-2017</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox" checked>
-                        <div class="slider round"></div>
-                    </label>
-                </td>
-                <td>
-                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="">Activity 3</a></td>
-                <td>20-07-2017</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <div class="slider round"></div>
-                    </label>
-                </td>
-                <td>
-                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="">Activity 4</a></td>
-                <td>20-07-2017</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <div class="slider round"></div>
-                    </label>
-                </td>
-                <td>
-                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
-            <tr>
-                <td><a href="">Activity 5</a></td>
-                <td>20-07-2017</td>
-                <td>
-                    <label class="switch">
-                        <input type="checkbox">
-                        <div class="slider round"></div>
-                    </label>
-                </td>
-                <td>
-                    <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
-                    <a href=""><span class="glyphicon glyphicon-trash"></span></a>
-                </td>
-            </tr>
+            {% for act in bucket_acts %}
+                <tr>
+                    <td><a href="">{{ act.name }}</a></td>
+                    <td>20-07-2017</td>
+                    <td>
+                        <label class="switch">
+                            <input type="checkbox" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </td>
+                    <td>
+                        <a href=""><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href=""><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                </tr>
+            {% endfor %}
             <tr>
                 <td colspan="4"><input type="button" id="add-activity-btn" value="Add Activity+" data-toggle="modal"
                                        data-target="#addActivityModal"></td>
@@ -119,7 +67,7 @@
                         <h4 class="modal-title" id="myModalLabel">Add an Activity</h4>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <form action="http://localhost:5000/create_activity/{{ bucket_name }}" method="post">
                             <div><input type="text" name="activity-name" class="modal-text-box"
                                         placeholder="Activity" required></div>
                             <div><input type="submit" id="create-bucket-btn" value="Add Activity"></div>
