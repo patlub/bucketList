@@ -1,11 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from classes.user import User
 from classes.bucket import Bucket
-from classes.activity import Activity
+from classes.item import Item
 
 app = Flask(__name__)
 all_buckets = []
-all_activities = []
+all_items = []
 
 
 @app.route('/', methods=['POST', 'GET'])
@@ -61,26 +61,26 @@ def create_bucket():
 
 @app.route('/create_activity/<string:bucket_name>', methods=['POST'])
 def create_activity(bucket_name):
-    activity_name = request.form['activity-name']
-    new_activity = Activity(activity_name)
-    all_activities.append(new_activity)
+    item_namm = request.form['activity-name']
+    new_item = Item(item_namm)
+    all_items.append(new_item)
 
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
-    bucket[0].activities.append(new_activity)
-    return redirect(url_for('activities',
+    bucket[0].items.append(new_item)
+    return redirect(url_for('items',
                             bucket_name=bucket_name))
 
 
 @app.route('/buckets/<string:bucket_name>')
-def activities(bucket_name):
+def items(bucket_name):
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
-    bucket_activities = bucket[0].activities
+    bucket_items = bucket[0].items
     bucket_description = bucket[0].description
     return render_template('activities.html',
                            bucket_name=bucket_name,
-                           bucket_acts=bucket_activities,
+                           bucket_acts=bucket_items,
                            bucket_desc=bucket_description)
 
 
@@ -92,22 +92,22 @@ def edit_bucket(bucket_name):
               if bucket.name == bucket_name]
     bucket[0].name = new_bucket_name
     bucket[0].description = new_description
-    return redirect(url_for('activities',
+    return redirect(url_for('items',
                             bucket_name=new_bucket_name))
 
 
 @app.route('/edit_activity/<string:bucket_name>/'
            '<string:activity_name>', methods=['POST', 'GET'])
-def edit_activity(activity_name, bucket_name):
+def edit_item(activity_name, bucket_name):
     if request.method == 'POST':
-        new_activity_name = request.form['activity-name']
+        new_item_name = request.form['activity-name']
 
         found_bucket = [bucket for bucket in all_buckets
                         if bucket.name == bucket_name]
-        activity = [activity for activity in found_bucket[0].activities
-                    if activity.name == activity_name]
-        activity[0].name = new_activity_name
-        return redirect(url_for('activities',
+        item = [item for item in found_bucket[0].items
+                if item.name == activity_name]
+        item[0].name = new_item_name
+        return redirect(url_for('items',
                                 bucket_name=bucket_name))
     else:
         return render_template('edit-activity.html',
@@ -126,14 +126,14 @@ def delete_bucket(bucket_name):
 
 @app.route('/del_activity/<string:bucket_name>/'
            '<string:activity_name>')
-def del_activity(activity_name, bucket_name):
+def del_item(activity_name, bucket_name):
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
     found_bucket = bucket[0]
-    activity = [activity for activity in found_bucket.activities
-                if activity.name == activity_name]
-    found_bucket.activities.remove(activity[0])
-    return redirect(url_for('activities',
+    item = [item for item in found_bucket.items
+            if item.name == activity_name]
+    found_bucket.items.remove(item[0])
+    return redirect(url_for('items',
                             bucket_name=bucket_name))
 
 
