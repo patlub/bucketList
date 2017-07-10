@@ -67,7 +67,8 @@
         </table>
 
         <!-- Add activity Modal -->
-        <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" align="center">
+        <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             align="center">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -88,7 +89,8 @@
         </div>
 
         <!-- Edit bucket Modal -->
-        <div class="modal fade" id="editBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" align="center">
+        <div class="modal fade" id="editBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             align="center">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -101,6 +103,8 @@
                         <form action="http://localhost:5000/edit_bucket/{{ bucket_name }}" method="post">
                             <div><input type="text" name="bucket-name" class="modal-text-box"
                                         placeholder="Bucket Name" value="{{ bucket_name }}" required></div>
+                            <div><input type="text" name="description" class="modal-text-box"
+                                        placeholder="Description" value="{{ bucket_desc }}" required></div>
                             <div><input type="submit" id="edit-bucket-btn" value="Update"></div>
                         </form>
                     </div>

@@ -53,7 +53,8 @@ def buckets():
 @app.route('/create_bucket', methods=["POST"])
 def create_bucket():
     bucket_name = request.form['bucket-name']
-    new_bucket = Bucket(bucket_name)
+    description = request.form['description']
+    new_bucket = Bucket(bucket_name, description)
     all_buckets.append(new_bucket)
     return redirect(url_for('buckets', name='to_be_added'))
 
@@ -76,17 +77,21 @@ def activities(bucket_name):
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
     bucket_activities = bucket[0].activities
+    bucket_description = bucket[0].description
     return render_template('activities.html',
                            bucket_name=bucket_name,
-                           bucket_acts=bucket_activities)
+                           bucket_acts=bucket_activities,
+                           bucket_desc=bucket_description)
 
 
 @app.route('/edit_bucket/<bucket_name>', methods=['POST'])
 def edit_bucket(bucket_name):
     new_bucket_name = request.form['bucket-name']
+    new_description = request.form['description']
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
     bucket[0].name = new_bucket_name
+    bucket[0].description = new_description
     return redirect(url_for('activities',
                             bucket_name=new_bucket_name))
 
