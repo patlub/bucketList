@@ -116,24 +116,23 @@ def edit_activity(activity_name, bucket_name):
 
 @app.route('/del_bucket/<string:bucket_name>')
 def delete_bucket(bucket_name):
-    for bucket in all_buckets:
-        if bucket.name == bucket_name:
-            all_buckets.remove(bucket)
-            return redirect(url_for('buckets'))
+    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    if bucket:
+        all_buckets.remove(bucket[0])
+        return redirect(url_for('buckets'))
 
 
 @app.route('/del_activity/<string:bucket_name>/'
            '<string:activity_name>')
 def del_activity(activity_name, bucket_name):
-    found_bucket = None
-    for bucket in all_buckets:
-        if bucket.name == bucket_name:
-            found_bucket = bucket
-    for activity in found_bucket.activities:
-        if activity.name == activity_name:
-            found_bucket.activities.remove(activity)
-            return redirect(url_for('activities',
-                                    bucket_name=bucket_name))
+    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    found_bucket = bucket[0]
+
+    activity = [activity for activity in found_bucket.activities
+                if activity.name == activity_name]
+    found_bucket.activities.remove(activity[0])
+    return redirect(url_for('activities',
+                            bucket_name=bucket_name))
 
 
 if __name__ == '__main__':
