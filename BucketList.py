@@ -83,11 +83,11 @@ def activities(bucket_name):
 def edit_bucket(bucket_name):
     if request.method == 'POST':
         new_bucket_name = request.form['bucket-name']
-        bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+        bucket = [bucket for bucket in all_buckets
+                  if bucket.name == bucket_name]
         bucket[0].name = new_bucket_name
         return redirect(url_for('activities',
                                 bucket_name=new_bucket_name))
-
     else:
         return render_template('edit-bucket.html',
                                bucket_name=bucket_name)
@@ -126,7 +126,6 @@ def delete_bucket(bucket_name):
 def del_activity(activity_name, bucket_name):
     bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
     found_bucket = bucket[0]
-
     activity = [activity for activity in found_bucket.activities
                 if activity.name == activity_name]
     found_bucket.activities.remove(activity[0])
