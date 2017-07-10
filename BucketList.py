@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from classes.user import User
 from classes.bucket import Bucket
 from classes.item import Item
 
 app = Flask(__name__)
+app.secret_key = 'MySecretKey'
 all_buckets = []
 all_items = []
 
@@ -20,6 +21,7 @@ def sign_up():
     password = request.form['password']
     user = User()
     user.sign_up(name, email, password)
+    session['email'] = email
     return redirect(url_for('buckets'))
 
 
@@ -30,6 +32,7 @@ def sign_in():
         password = request.form['password']
         user = User()
         if user.sign_in(email, password):
+            session['email'] = email
             return redirect(url_for('buckets'))
         else:
             return render_template('signIn.html',
@@ -42,16 +45,22 @@ def sign_in():
 def sign_out():
     user = User()
     user.sign_out()
+    session.pop('email', None)
+    return redirect(url_for('sign_in'))
 
 
 @app.route('/buckets')
 def buckets():
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     return render_template('buckets.html',
                            buckets=all_buckets, len=len(all_buckets))
 
 
 @app.route('/create_bucket', methods=["POST"])
 def create_bucket():
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     bucket_name = request.form['bucket-name']
     description = request.form['description']
     new_bucket = Bucket(bucket_name, description)
@@ -61,6 +70,8 @@ def create_bucket():
 
 @app.route('/create_activity/<string:bucket_name>', methods=['POST'])
 def create_activity(bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     item_namm = request.form['activity-name']
     new_item = Item(item_namm)
     all_items.append(new_item)
@@ -74,6 +85,8 @@ def create_activity(bucket_name):
 
 @app.route('/buckets/<string:bucket_name>')
 def items(bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
     bucket_items = bucket[0].items
@@ -86,6 +99,8 @@ def items(bucket_name):
 
 @app.route('/edit_bucket/<bucket_name>', methods=['POST'])
 def edit_bucket(bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     new_bucket_name = request.form['bucket-name']
     new_description = request.form['description']
     bucket = [bucket for bucket in all_buckets
@@ -99,6 +114,8 @@ def edit_bucket(bucket_name):
 @app.route('/edit_activity/<string:bucket_name>/'
            '<string:activity_name>', methods=['POST', 'GET'])
 def edit_item(activity_name, bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     if request.method == 'POST':
         new_item_name = request.form['activity-name']
 
@@ -117,6 +134,8 @@ def edit_item(activity_name, bucket_name):
 
 @app.route('/del_bucket/<string:bucket_name>')
 def delete_bucket(bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
     if bucket:
@@ -127,6 +146,8 @@ def delete_bucket(bucket_name):
 @app.route('/del_activity/<string:bucket_name>/'
            '<string:activity_name>')
 def del_item(activity_name, bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
     bucket = [bucket for bucket in all_buckets
               if bucket.name == bucket_name]
     found_bucket = bucket[0]
