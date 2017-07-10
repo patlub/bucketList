@@ -77,7 +77,7 @@
     background-color: #0000ff;
     color: #ffffff;
     font-size: 140%;
-    width: 150px;
+    width: 70%;
     margin-top: 7%;
 }
 
@@ -96,7 +96,7 @@
     margin-bottom: 3%;
 }
 
-.bucket:hover{
+.bucket:hover {
     opacity: 0.7;
 }
 
@@ -153,7 +153,7 @@
 }
 
 .modal-text-box {
-    width: 50%;
+    width: 70%;
     height: 35px;
     border: 3px solid lightgrey;
     font-size: 150%;
@@ -161,7 +161,7 @@
 }
 
 #create-bucket-btn {
-    width: 50%;
+    width: 70%;
     height: 35px;
     font-size: 150%;
     margin-top: 5%;
@@ -181,7 +181,7 @@
     margin-right: 2%;
 }
 
-.error{
+.error {
     color: red;
 }
 
@@ -192,4 +192,8 @@
 
 .edit-box {
     margin-left: 2%;
+}
+
+.modal-dialog {
+    width: 350px; /* New width for default modal */
 }
