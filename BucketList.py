@@ -64,7 +64,8 @@ def create_activity(bucket_name):
     new_activity = Activity(activity_name)
     all_activities.append(new_activity)
 
-    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    bucket = [bucket for bucket in all_buckets
+              if bucket.name == bucket_name]
     bucket[0].activities.append(new_activity)
     return redirect(url_for('activities',
                             bucket_name=bucket_name))
@@ -72,41 +73,37 @@ def create_activity(bucket_name):
 
 @app.route('/buckets/<string:bucket_name>')
 def activities(bucket_name):
-    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    bucket = [bucket for bucket in all_buckets
+              if bucket.name == bucket_name]
     bucket_activities = bucket[0].activities
     return render_template('activities.html',
                            bucket_name=bucket_name,
                            bucket_acts=bucket_activities)
 
 
-@app.route('/edit_bucket/<bucket_name>', methods=['POST', 'GET'])
+@app.route('/edit_bucket/<bucket_name>', methods=['POST'])
 def edit_bucket(bucket_name):
-    if request.method == 'POST':
-        new_bucket_name = request.form['bucket-name']
-        bucket = [bucket for bucket in all_buckets
-                  if bucket.name == bucket_name]
-        bucket[0].name = new_bucket_name
-        return redirect(url_for('activities',
-                                bucket_name=new_bucket_name))
-    else:
-        return render_template('edit-bucket.html',
-                               bucket_name=bucket_name)
+    new_bucket_name = request.form['bucket-name']
+    bucket = [bucket for bucket in all_buckets
+              if bucket.name == bucket_name]
+    bucket[0].name = new_bucket_name
+    return redirect(url_for('activities',
+                            bucket_name=new_bucket_name))
 
 
 @app.route('/edit_activity/<string:bucket_name>/'
            '<string:activity_name>', methods=['POST', 'GET'])
 def edit_activity(activity_name, bucket_name):
     if request.method == 'POST':
-        found_bucket = None
         new_activity_name = request.form['activity-name']
-        for bucket in all_buckets:
-            if bucket.name == bucket_name:
-                found_bucket = bucket
-        for activity in found_bucket.activities:
-            if activity.name == activity_name:
-                activity.name = new_activity_name
-                return redirect(url_for('activities',
-                                        bucket_name=bucket_name))
+
+        found_bucket = [bucket for bucket in all_buckets
+                        if bucket.name == bucket_name]
+        activity = [activity for activity in found_bucket[0].activities
+                    if activity.name == activity_name]
+        activity[0].name = new_activity_name
+        return redirect(url_for('activities',
+                                bucket_name=bucket_name))
     else:
         return render_template('edit-activity.html',
                                bucket_name=bucket_name,
@@ -115,7 +112,8 @@ def edit_activity(activity_name, bucket_name):
 
 @app.route('/del_bucket/<string:bucket_name>')
 def delete_bucket(bucket_name):
-    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    bucket = [bucket for bucket in all_buckets
+              if bucket.name == bucket_name]
     if bucket:
         all_buckets.remove(bucket[0])
         return redirect(url_for('buckets'))
@@ -124,7 +122,8 @@ def delete_bucket(bucket_name):
 @app.route('/del_activity/<string:bucket_name>/'
            '<string:activity_name>')
 def del_activity(activity_name, bucket_name):
-    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    bucket = [bucket for bucket in all_buckets
+              if bucket.name == bucket_name]
     found_bucket = bucket[0]
     activity = [activity for activity in found_bucket.activities
                 if activity.name == activity_name]

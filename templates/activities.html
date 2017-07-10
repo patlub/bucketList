@@ -19,9 +19,8 @@
             <a href="http://localhost:5000/buckets"><em>Buckets</em></a> / {{ bucket_name }}</h2>
         </div>
         <div class="col-md-2">
-            <a href="http://localhost:5000/edit_bucket/{{ bucket_name }}">
-                <input type="button" id="e-bucket-btn" value="Edit Bucket"/>
-            </a>
+            <input type="button" id="e-bucket-btn" value="Edit Bucket" data-toggle="modal"
+                   data-target="#editBucketModal"/>
         </div>
         <div class="col-md-2">
             <a href="http://localhost:5000/del_bucket/{{ bucket_name }}">
@@ -68,7 +67,7 @@
             </tbody>
         </table>
 
-        <!-- Modal -->
+        <!-- Add activity Modal -->
         <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -88,6 +87,28 @@
                 </div>
             </div>
         </div>
+
+        <!-- Edit bucket Modal -->
+        <div class="modal fade" id="editBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">Edit a Bucket</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form action="http://localhost:5000/edit_bucket/{{ bucket_name }}" method="post">
+                            <div><input type="text" name="bucket-name" class="modal-text-box"
+                                        placeholder="Bucket Name" value="{{ bucket_name }}" required></div>
+                            <div><input type="submit" id="edit-bucket-btn" value="Update"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 </body>
