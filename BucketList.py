@@ -63,32 +63,31 @@ def create_activity(bucket_name):
     activity_name = request.form['activity-name']
     new_activity = Activity(activity_name)
     all_activities.append(new_activity)
-    for bucket in all_buckets:
-        if bucket.name == bucket_name:
-            bucket.activities.append(new_activity)
-            return redirect(url_for('activities',
-                                    bucket_name=bucket_name))
+
+    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    bucket[0].activities.append(new_activity)
+    return redirect(url_for('activities',
+                            bucket_name=bucket_name))
 
 
 @app.route('/buckets/<string:bucket_name>')
 def activities(bucket_name):
-    for bucket in all_buckets:
-        if bucket_name == bucket.name:
-            bucket_activities = bucket.activities
-            return render_template('activities.html',
-                                   bucket_name=bucket_name,
-                                   bucket_acts=bucket_activities)
+    bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+    bucket_activities = bucket[0].activities
+    return render_template('activities.html',
+                           bucket_name=bucket_name,
+                           bucket_acts=bucket_activities)
 
 
 @app.route('/edit_bucket/<bucket_name>', methods=['POST', 'GET'])
 def edit_bucket(bucket_name):
     if request.method == 'POST':
         new_bucket_name = request.form['bucket-name']
-        for bucket in all_buckets:
-            if bucket.name == bucket_name:
-                bucket.name = new_bucket_name
-                return redirect(url_for('activities',
-                                        bucket_name=new_bucket_name))
+        bucket = [bucket for bucket in all_buckets if bucket.name == bucket_name]
+        bucket[0].name = new_bucket_name
+        return redirect(url_for('activities',
+                                bucket_name=new_bucket_name))
+
     else:
         return render_template('edit-bucket.html',
                                bucket_name=bucket_name)
