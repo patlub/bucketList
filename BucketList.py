@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from classes.user import User
 from classes.bucket import Bucket
 from classes.item import Item
@@ -7,7 +7,7 @@ from classes.app import App
 app = Flask(__name__)
 app.secret_key = 'MySecretKey'
 all_items = []
-user = None
+current_user = None
 bucketApp = App()
 
 
@@ -27,8 +27,9 @@ def sign_up():
     email = request.form['email']
     password = request.form['password']
     # create user
-    user = User(name, email, password)
-    session_id = bucketApp.sign_up(user)
+    global current_user
+    current_user = User(name, email, password)
+    session_id = bucketApp.sign_up(current_user)
     # start session
     session['id'] = session_id
     return redirect(url_for('buckets'))
@@ -43,9 +44,10 @@ def sign_in():
         # Pick form values
         email = request.form['email']
         password = request.form['password']
-        user = User(email, password)
+        global current_user
+        current_user = User(email, password)
         # start session
-        session['id'] = bucketApp.sign_in(user)
+        session['id'] = bucketApp.sign_in(current_user)
         if session['id']:
             return redirect(url_for('buckets'))
         return render_template('signIn.html',
@@ -70,9 +72,14 @@ def buckets():
     """
     if 'id' not in session:
         return redirect(url_for('sign_in'))
-    return render_template('buckets.html',
-                           buckets=user.all_buckets,
-                           len=len(user.all_buckets))
+
+    user = [user for user in bucketApp.all_users if user.id == session['id']]
+    if user:
+        return render_template('buckets.html',
+                               buckets=user[0].buckets,
+                               len=len(user[0].buckets))
+    else:
+        return redirect(url_for('sign_in'))
 
 
 @app.route('/create_bucket', methods=["POST"])
@@ -90,9 +97,11 @@ def create_bucket():
     description = request.form['description']
     # create bucket
     new_bucket = Bucket(bucket_name, description, session['id'])
-    if user.create_bucket(new_bucket):
-        return redirect(url_for('buckets', name='to_be_added'))
-    return redirect(url_for('buckets', error='Bucket name already exists'))
+    global current_user
+    if current_user.create_bucket(new_bucket):
+        return redirect(url_for('buckets'))
+    flash('Bucket name already exists')
+    return redirect(url_for('buckets'))
 
 
 if __name__ == '__main__':

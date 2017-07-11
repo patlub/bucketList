@@ -11,17 +11,27 @@
 <body>
 <div class="container-fluid">
     <div class="col-md-12">
-        <h1><strong>MyBucket, </strong></h1>Hello {{ name }}
+        <h1><strong>MyBucket
     </div>
     <div class="row">
         <div id="bucket-lists-heading" class="col-md-10"><h2>Bucket Lists</h2></div>
+        <div class="error">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         <div class="col-md-2">
             <input type="button" id="create-bucket" value="Create New" data-toggle="modal"
                    data-target="#addBucketModal"/>
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="addBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" align="center">
+    <div class="modal fade" id="addBucketModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         align="center">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -42,7 +52,6 @@
             </div>
         </div>
     </div>
-    <div class="error">{{ error }}</div>
     <div class="col-md-12">
         {% for bucket in buckets %}
             {% set achieved = 0 %}

@@ -16,3 +16,4 @@ class User:
             if existing_bucket.name == bucket.name]:
                 return False
         self.buckets.append(bucket)
+        return True
