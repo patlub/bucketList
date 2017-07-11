@@ -1,5 +1,5 @@
 class User:
-    def __init__(self, email, password, name = None) -> None:
+    def __init__(self, email, password, name=None) -> None:
         """
         Initiates class User
         :param email: 
@@ -20,7 +20,7 @@ class User:
         # Check if bucket_name_already exists
         if [existing_bucket for existing_bucket in self.buckets
             if existing_bucket.name == bucket.name]:
-                return False
+            return False
         self.buckets.append(bucket)
         return True
 
@@ -32,8 +32,7 @@ class User:
         :param new_bucket_name: 
         :param new_bucket_description:  
         """
-        bucket =  [bucket for bucket in self.buckets
-                    if bucket.name == bucket_name]
+        bucket = self.get_bucket_from_name(bucket_name)
         if bucket:
             bucket[0].name = new_bucket_name
             bucket[0].description = new_bucket_description
@@ -49,8 +48,7 @@ class User:
         Deletes a user's bucket
         :param bucket_name:  
         """
-        bucket = [bucket for bucket in self.buckets
-                  if bucket.name == bucket_name]
+        bucket = self.get_bucket_from_name(bucket_name)
         self.buckets.remove(bucket[0])
 
     def get_single_bucket(self, bucket_name):
@@ -58,6 +56,18 @@ class User:
         Gets a single bucket with given name
         :param bucket_name:  
         """
-        bucket =  [bucket for bucket in self.buckets
-                    if bucket.name == bucket_name]
+        bucket = self.get_bucket_from_name(bucket_name)
         return bucket[0]
+
+    def add_item(self, bucket_name, item):
+        """
+        Adds an item to a bucket
+        :param bucket_name: 
+        :param item:  
+        """
+        bucket = self.get_bucket_from_name(bucket_name)
+        bucket[0].items.append(item)
+
+    def get_bucket_from_name(self, bucket_name):
+        return [bucket for bucket in self.buckets
+                if bucket.name == bucket_name]
