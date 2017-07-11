@@ -17,3 +17,10 @@ class User:
                 return False
         self.buckets.append(bucket)
         return True
+
+    def edit_bucket(self, bucket_name, new_bucket_name, new_bucket_description):
+        bucket =  [existing_bucket for existing_bucket in self.buckets
+                    if existing_bucket.name == bucket_name]
+        if bucket:
+            bucket[0].name = new_bucket_name
+            bucket[0].description = new_bucket_description
