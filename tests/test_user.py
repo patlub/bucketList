@@ -30,7 +30,8 @@ class UserCase(unittest.TestCase):
         self.user.create_bucket(self.bucket)
         new_bucket_name = 'food'
         new_bucket_description = 'food types'
-        self.user.edit_bucket(self.bucket.name, new_bucket_name, new_bucket_description)
+        self.user.edit_bucket(self.bucket.name,
+                              new_bucket_name, new_bucket_description)
         self.assertEqual(self.bucket.name, new_bucket_name)
         self.assertEqual(self.bucket.description, new_bucket_description)
 
