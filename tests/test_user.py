@@ -74,6 +74,7 @@ class UserCase(unittest.TestCase):
         self.assertEqual(self.bucket.items[index].name, 'Kampala')
 
     def test_user_edit_item_in_bucket(self):
+        """Should check if an item in a bucket is successfully edited """
         bucket_name = 'travel'
         item_name = 'Kampala'
         new_item_name = 'NewYork'
@@ -83,6 +84,19 @@ class UserCase(unittest.TestCase):
         self.assertEqual(self.bucket.items[index].name, 'Kampala')
         self.user.edit_item(bucket_name, item_name, new_item_name)
         self.assertEqual(self.bucket.items[index].name, 'NewYork')
+
+    def test_get_items_in_bucket(self):
+        """Should check if bucket items are well fetched"""
+        bucket_name = 'travel'
+        item1 = Item('Kampala')
+        item2= Item('Nairobi')
+
+        self.user.create_bucket(self.bucket)
+        self.user.add_item(bucket_name, item1)
+        self.user.add_item(bucket_name, item2)
+        items = self.user.get_items(bucket_name)
+        self.assertIsInstance(len(items), list)
+        self.assertEqual(len(items), 2)
 
 
 if __name__ == '__main__':
