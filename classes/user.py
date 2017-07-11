@@ -53,7 +53,7 @@ class User:
                   if bucket.name == bucket_name]
         self.buckets.remove(bucket[0])
 
-    def get_bucket(self, bucket_name):
+    def get_single_bucket(self, bucket_name):
         """
         Gets a single bucket with given name
         :param bucket_name:  

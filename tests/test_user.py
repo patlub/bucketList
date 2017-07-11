@@ -1,6 +1,7 @@
 import unittest
 from classes.user import User
 from classes.bucket import Bucket
+from classes.item import Item
 
 
 class UserCase(unittest.TestCase):
@@ -8,6 +9,7 @@ class UserCase(unittest.TestCase):
     def setUp(self):
         self.user = User('patrick@gmail.com', 'password', 'Patrick')
         self.bucket = Bucket('travel', 'cities', 2)
+        self.item = Item('Kampala')
 
     def test_user_created(self):
         """Should test that user is created successfully"""
@@ -48,22 +50,27 @@ class UserCase(unittest.TestCase):
         """Should check getting a single bucket"""
         self.bucket1 = Bucket('travel', 'cities', 2)
         self.user.create_bucket(self.bucket)
-        bucket = self.user.get_bucket('travel')
+        bucket = self.user.get_single_bucket('travel')
         self.assertEqual(bucket.name, 'travel')
         self.assertEqual(bucket.description, 'cities')
         self.assertEqual(bucket.id, 2)
-
 
     def test_delete_bucket(self):
         """Should check if bucket is deleted by user"""
         self.bucket1 = Bucket('travel', 'cities', 2)
         self.bucket2 = Bucket('food', 'test foods', 3)
-        self.user.create_bucket(self.bucket)
+        self.user.create_bucket(self.bucket1)
         self.user.create_bucket(self.bucket2)
         self.assertEqual(len(self.user.get_buckets()), 2)
         self.user.delete_bucket('travel')
         self.assertEqual(len(self.user.get_buckets()), 1)
 
+    def test_user_add_item_to_bucket(self):
+        """Should check if item is successfully added to bucket"""
+        self.user.create_bucket(self.bucket)
+        self.user.add_item('travel', self.item)
+        index = len(self.bucket.items) - 1
+        self.assertEqual(self.bucket.items[index].name, 'Kampala')
 
 
 if __name__ == '__main__':
