@@ -32,8 +32,8 @@ class User:
         :param new_bucket_name: 
         :param new_bucket_description:  
         """
-        bucket =  [existing_bucket for existing_bucket in self.buckets
-                    if existing_bucket.name == bucket_name]
+        bucket =  [bucket for bucket in self.buckets
+                    if bucket.name == bucket_name]
         if bucket:
             bucket[0].name = new_bucket_name
             bucket[0].description = new_bucket_description
@@ -44,7 +44,7 @@ class User:
         """
         return self.buckets
 
-    def delete_bucket(self, bucket_name):
+    def delete_bucket(self, bucket_name) -> None:
         """
         Deletes a user's bucket
         :param bucket_name:  
@@ -52,3 +52,12 @@ class User:
         bucket = [bucket for bucket in self.buckets
                   if bucket.name == bucket_name]
         self.buckets.remove(bucket[0])
+
+    def get_bucket(self, bucket_name):
+        """
+        Gets a single bucket with given name
+        :param bucket_name:  
+        """
+        bucket =  [bucket for bucket in self.buckets
+                    if bucket.name == bucket_name]
+        return bucket[0]
