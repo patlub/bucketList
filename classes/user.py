@@ -68,6 +68,19 @@ class User:
         bucket = self.get_bucket_from_name(bucket_name)
         bucket[0].items.append(item)
 
+    def edit_item(self, bucket_name, item_name, new_item_name):
+        """
+        Edit an item in a bucket
+        :param bucket_name: 
+        :param item_name: 
+        :param new_item_name:  
+        """
+        bucket = self.get_bucket_from_name(bucket_name)
+        item = [item for item in bucket[0].items
+                if item.name == item_name]
+        if item:
+            item[0].name = new_item_name
+
     def get_bucket_from_name(self, bucket_name):
         return [bucket for bucket in self.buckets
                 if bucket.name == bucket_name]

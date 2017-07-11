@@ -67,10 +67,22 @@ class UserCase(unittest.TestCase):
 
     def test_user_add_item_to_bucket(self):
         """Should check if item is successfully added to bucket"""
+        bucket_name = 'travel'
         self.user.create_bucket(self.bucket)
-        self.user.add_item('travel', self.item)
+        self.user.add_item(bucket_name, self.item)
         index = len(self.bucket.items) - 1
         self.assertEqual(self.bucket.items[index].name, 'Kampala')
+
+    def test_user_edit_item_in_bucket(self):
+        bucket_name = 'travel'
+        item_name = 'Kampala'
+        new_item_name = 'NewYork'
+        self.user.create_bucket(self.bucket)
+        self.user.add_item(bucket_name, self.item)
+        index = len(self.bucket.items) - 1
+        self.assertEqual(self.bucket.items[index].name, 'Kampala')
+        self.user.edit_item(bucket_name, item_name, new_item_name)
+        self.assertEqual(self.bucket.items[index].name, 'NewYork')
 
 
 if __name__ == '__main__':
