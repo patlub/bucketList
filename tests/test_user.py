@@ -41,14 +41,28 @@ class UserCase(unittest.TestCase):
         self.bucket2 = Bucket('food', 'test foods', 3)
         self.user.create_bucket(self.bucket)
         self.user.create_bucket(self.bucket2)
-
         self.assertIsInstance(self.user.get_buckets(), list)
         self.assertEqual(len(self.user.get_buckets()), 2)
-        buckets = self.user.get_buckets()
+
+    def test_get_single_bucket(self):
+        """Should check getting a single bucket"""
+        self.bucket1 = Bucket('travel', 'cities', 2)
+        self.user.create_bucket(self.bucket)
+        bucket = self.user.get_bucket('travel')
+        self.assertEqual(bucket.name, 'travel')
+        self.assertEqual(bucket.description, 'cities')
+        self.assertEqual(bucket.id, 2)
 
 
-
-
+    def test_delete_bucket(self):
+        """Should check if bucket is deleted by user"""
+        self.bucket1 = Bucket('travel', 'cities', 2)
+        self.bucket2 = Bucket('food', 'test foods', 3)
+        self.user.create_bucket(self.bucket)
+        self.user.create_bucket(self.bucket2)
+        self.assertEqual(len(self.user.get_buckets()), 2)
+        self.user.delete_bucket('travel')
+        self.assertEqual(len(self.user.get_buckets()), 1)
 
 
 

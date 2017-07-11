@@ -39,4 +39,16 @@ class User:
             bucket[0].description = new_bucket_description
 
     def get_buckets(self):
+        """
+        Returns list of all user's buckets 
+        """
         return self.buckets
+
+    def delete_bucket(self, bucket_name):
+        """
+        Deletes a user's bucket
+        :param bucket_name:  
+        """
+        bucket = [bucket for bucket in self.buckets
+                  if bucket.name == bucket_name]
+        self.buckets.remove(bucket[0])
