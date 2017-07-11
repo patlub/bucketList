@@ -37,3 +37,6 @@ class User:
         if bucket:
             bucket[0].name = new_bucket_name
             bucket[0].description = new_bucket_description
+
+    def get_buckets(self):
+        return self.buckets

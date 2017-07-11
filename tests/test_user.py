@@ -43,10 +43,9 @@ class UserCase(unittest.TestCase):
         self.user.create_bucket(self.bucket2)
 
         self.assertIsInstance(self.user.get_buckets(), list)
-        self.assertIsInstance(len(self.user.get_buckets()), 2)
+        self.assertEqual(len(self.user.get_buckets()), 2)
         buckets = self.user.get_buckets()
-        self.assertEqual(buckets[0], self.bucket1)
-        self.assertEqual(buckets[1], self.bucket2)
+
 
 
 
