@@ -1,6 +1,6 @@
 class Bucket:
-    def __init__(self, name, description) -> None:
+    def __init__(self, name, description, id) -> None:
         self.name = name
         self.description = description
+        self.id = id
         self.items = []
-        self.email = None

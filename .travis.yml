@@ -1,7 +1,10 @@
 language: python
 # vesions
 python:
+  - "3.3"
   - "3.4"
+  - "3.5"
+  - "3.6"
 cache: pip
 # command to install dependencies
 install:
