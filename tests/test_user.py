@@ -20,10 +20,21 @@ class UserCase(unittest.TestCase):
         self.assertEqual(self.user.buckets[index].name, 'travel')
         self.assertEqual(self.user.buckets[index].description, 'cities')
 
-    def test_create_bucket_that_already_exixsts(self):
+    def test_create_bucket_that_already_exists(self):
         """Should return false if bucket name already exists"""
         self.user.create_bucket(self.bucket)
         self.assertFalse(self.user.create_bucket(self.bucket))
+
+    def test_edit_bucket_functionality(self):
+        """Should test for edit bucket name and description"""
+        self.user.create_bucket(self.bucket)
+        new_bucket_name = 'food'
+        new_bucket_description = 'food types'
+        self.user.edit_bucket(self.bucket.name, new_bucket_name, new_bucket_description)
+        self.assertEqual(self.bucket.name, new_bucket_name)
+        self.assertEqual(self.bucket.description, new_bucket_description)
+
+
 
 
 
