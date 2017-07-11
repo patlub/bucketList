@@ -3,3 +3,4 @@ class Bucket:
         self.name = name
         self.description = description
         self.items = []
+        self.email = None

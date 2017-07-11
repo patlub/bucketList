@@ -4,7 +4,7 @@ from classes.bucket import Bucket
 
 class BucketTestCase(unittest.TestCase):
     def setUp(self):
-        self.bucket = Bucket('Travel')
+        self.bucket = Bucket('Travel', 'Cities I must visit before 30')
 
     def test_bucket_created(self):
         """Should test if bucket has been created successfully"""
