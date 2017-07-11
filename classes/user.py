@@ -11,4 +11,8 @@ class User:
         Creates new bucket for user
         :param bucket: 
         """
+        # Check if bucket_name_already exists
+        if [existing_bucket for existing_bucket in self.buckets
+            if existing_bucket.name == bucket.name]:
+                return False
         self.buckets.append(bucket)

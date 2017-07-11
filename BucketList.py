@@ -90,8 +90,9 @@ def create_bucket():
     description = request.form['description']
     # create bucket
     new_bucket = Bucket(bucket_name, description, session['id'])
-    user.create_bucket(new_bucket)
-    return redirect(url_for('buckets', name='to_be_added'))
+    if user.create_bucket(new_bucket):
+        return redirect(url_for('buckets', name='to_be_added'))
+    return redirect(url_for('buckets', error='Bucket name already exists'))
 
 
 if __name__ == '__main__':
