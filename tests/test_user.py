@@ -1,44 +1,31 @@
 import unittest
 from classes.user import User
+from classes.bucket import Bucket
 
 
 class UserCase(unittest.TestCase):
     @classmethod
     def setUp(self):
-        self.user = User()
+        self.user = User('patrick@gmail.com', 'password', 'Patrick')
+        self.bucket = Bucket('travel', 'cities', 2)
 
     def test_user_created(self):
         """Should test that user is created successfully"""
         self.assertTrue(self.user)
 
-    def test_user_sign_up(self):
-        """Should test if sign up details are assigned to new user """
-        name = 'Patrick'
-        email = 'Patrick@gmail.com'
-        password = 'patrick'
-        self.user.sign_up(name, email, password)
-        self.assertEqual(self.user.name, name)
-        self.assertEqual(self.user.email, email)
-        self.assertEqual(self.user.password, password)
+    def test_create_bucket(self):
+        """Should succesfully create a bucket"""
+        self.user.create_bucket(self.bucket)
+        index = len(self.user.buckets) - 1
+        self.assertEqual(self.user.buckets[index].name, 'travel')
+        self.assertEqual(self.user.buckets[index].description, 'cities')
 
-    def test_user_sign_in(self):
-        """Should test if user successfully signs in"""
-        email = 'Patrick@gmail.com'
-        password = 'patrick'
-        self.user.sign_in(email, password)
-        self.assertEqual(self.user.email, email)
-        self.assertEqual(self.user.password, password)
-        self.assertEqual(self.user.name, 'Patrick')
+    def test_create_bucket_that_already_exixsts(self):
+        """Should return false if bucket name already exists"""
+        self.user.create_bucket(self.bucket)
+        self.assertFalse(self.user.create_bucket(self.bucket))
 
-    def test_user_sign_out(self):
-        """Should test if user is signed out successfully"""
-        email = 'Patrick@gmail.com'
-        password = 'patrick'
-        self.user.sign_in(email, password)
-        self.user.sign_out()
-        self.assertIsNone(self.user.name)
-        self.assertIsNone(self.user.email)
-        self.assertIsNone(self.user.password)
+
 
 
 if __name__ == '__main__':

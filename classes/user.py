@@ -6,5 +6,9 @@ class User:
         self.buckets = []
         self.id = None
 
-    def create_bucket(self, bucket):
+    def create_bucket(self, bucket) -> bool:
+        """
+        Creates new bucket for user
+        :param bucket: 
+        """
         self.buckets.append(bucket)
