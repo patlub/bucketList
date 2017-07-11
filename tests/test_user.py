@@ -35,6 +35,19 @@ class UserCase(unittest.TestCase):
         self.assertEqual(self.bucket.name, new_bucket_name)
         self.assertEqual(self.bucket.description, new_bucket_description)
 
+    def test_get_user_buckets(self):
+        """Should check that a user can fetch all their buckets"""
+        self.bucket1 = Bucket('travel', 'cities', 2)
+        self.bucket2 = Bucket('food', 'test foods', 3)
+        self.user.create_bucket(self.bucket)
+        self.user.create_bucket(self.bucket2)
+
+        self.assertIsInstance(self.user.get_buckets(), list)
+        self.assertIsInstance(len(self.user.get_buckets()), 2)
+        buckets = self.user.get_buckets()
+        self.assertEqual(buckets[0], self.bucket1)
+        self.assertEqual(buckets[1], self.bucket2)
+
 
 
 
