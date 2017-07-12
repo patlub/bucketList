@@ -82,14 +82,27 @@ class User:
             item[0].name = new_item_name
 
     def get_items(self, bucket_name):
+        """
+        Returns a list of items from a bucket
+        :param bucket_name:  
+        """
         bucket = self.get_bucket_from_name(bucket_name)
         return bucket[0].items
 
     def get_bucket_from_name(self, bucket_name):
+        """
+        gets bucket object using bucket name
+        :param bucket_name:  
+        """
         return [bucket for bucket in self.buckets
                 if bucket.name == bucket_name]
 
     def delete_item(self, bucket_name, item_name):
+        """
+        Deletes an item from a bucket
+        :param bucket_name: 
+        :param item_name:  
+        """
         bucket = self.get_bucket_from_name(bucket_name)
         item = [item for item in bucket[0].items if item.name == item_name]
         bucket[0].items.remove(item[0])

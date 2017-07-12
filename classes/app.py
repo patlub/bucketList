@@ -6,8 +6,7 @@ class App:
     def sign_up(self, user) -> int:
         """
         Signs up a user to the app
-        Args:
-            user: user object
+        :param user: 
         """
         if self.all_users:
             id = self.all_users[len(self.all_users) - 1].id + 1
@@ -20,8 +19,7 @@ class App:
     def sign_in(self, user) -> bool:
         """
         signs in a user to the app
-        Args:
-            user: user object
+        :param user: 
         """
         for existing_user in self.all_users:
             if existing_user.name == user.name and existing_user.email == user.email:
