@@ -12,20 +12,20 @@
 #     return redirect(url_for('items',
 #                             bucket_name=bucket_name))
 
-#
-# @app.route('/buckets/<string:bucket_name>')
-# def items(bucket_name):
-#     if 'email' not in session:
-#         return redirect(url_for('sign_in'))
-#     bucket = [bucket for bucket in all_buckets
-#               if bucket.name == bucket_name]
-#     bucket_items = bucket[0].items
-#     bucket_description = bucket[0].description
-#     return render_template('activities.html',
-#                            bucket_name=bucket_name,
-#                            bucket_acts=bucket_items,
-#                            bucket_desc=bucket_description)
-#
+
+@app.route('/buckets/<string:bucket_name>')
+def single_bucket(bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
+    bucket = [bucket for bucket in all_buckets
+              if bucket.name == bucket_name]
+    bucket_items = bucket[0].items
+    bucket_description = bucket[0].description
+    return render_template('activities.html',
+                           bucket_name=bucket_name,
+                           bucket_acts=bucket_items,
+                           bucket_desc=bucket_description)
+
 
 @app.route('/edit_bucket/<bucket_name>', methods=['POST'])
 def edit_bucket(bucket_name):

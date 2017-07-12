@@ -43,14 +43,6 @@ class User:
         """
         return self.buckets
 
-    def delete_bucket(self, bucket_name) -> None:
-        """
-        Deletes a user's bucket
-        :param bucket_name:  
-        """
-        bucket = self.get_bucket_from_name(bucket_name)
-        self.buckets.remove(bucket[0])
-
     def get_single_bucket(self, bucket_name):
         """
         Gets a single bucket with given name
@@ -58,6 +50,14 @@ class User:
         """
         bucket = self.get_bucket_from_name(bucket_name)
         return bucket[0]
+
+    def delete_bucket(self, bucket_name) -> None:
+        """
+        Deletes a user's bucket
+        :param bucket_name:  
+        """
+        bucket = self.get_bucket_from_name(bucket_name)
+        self.buckets.remove(bucket[0])
 
     def add_item(self, bucket_name, item):
         """

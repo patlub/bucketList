@@ -107,14 +107,29 @@ def create_bucket():
 
 @app.route('/edit_bucket/<bucket_name>', methods=['POST'])
 def edit_bucket(bucket_name):
-    if 'email' not in session:
+    if 'id' not in session:
         return redirect(url_for('sign_in'))
     new_bucket_name = request.form['bucket-name']
     new_description = request.form['description']
     global current_user
-    if current_user.edit_bucket(bucket_name, new_bucket_name, new_description):
-        return redirect(url_for('items',
-                                bucket_name=new_bucket_name))
+    current_user.edit_bucket(bucket_name, new_bucket_name, new_description)
+    return redirect(url_for('single_bucket',
+                            bucket_name=new_bucket_name))
+
+@app.route('/buckets/<string:bucket_name>')
+def single_bucket(bucket_name):
+    if 'id' not in session:
+        return redirect(url_for('sign_in'))
+    global current_user
+    bucket = current_user.get_single_bucket(bucket_name)
+    return render_template('activities.html',
+                           bucket_name=bucket_name,
+                           bucket_acts=bucket.items,
+                           bucket_desc=bucket.description)
+
+
+
+
 
 
 if __name__ == '__main__':
