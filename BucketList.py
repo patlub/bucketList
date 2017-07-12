@@ -123,7 +123,7 @@ def single_bucket(bucket_name):
         return redirect(url_for('sign_in'))
     global current_user
     bucket = current_user.get_single_bucket(bucket_name)
-    return render_template('activities.html',
+    return render_template('items.html',
                            bucket_name=bucket_name,
                            bucket_acts=bucket.items,
                            bucket_desc=bucket.description)
@@ -136,6 +136,38 @@ def delete_bucket(bucket_name):
     global current_user
     current_user.delete_bucket(bucket_name)
     return redirect(url_for('buckets'))
+
+
+@app.route('/create_item/<string:bucket_name>', methods=['POST'])
+def create_item(bucket_name):
+    if 'id' not in session:
+        return redirect(url_for('sign_in'))
+    item_name = request.form['item-name']
+    new_item = Item(item_name)
+    global current_user
+    current_user.add_item(bucket_name, new_item)
+    return redirect(url_for('single_bucket', bucket_name=bucket_name))
+
+
+@app.route('/edit_item/<string:bucket_name>/'
+           '<item_name>', methods=['POST', 'GET'])
+def edit_item(item_name, bucket_name):
+    if 'id' not in session:
+        return redirect(url_for('sign_in'))
+    if request.method == 'POST':
+        new_item_name = request.form['item-name']
+        status = request.form['status']
+
+        global current_user
+        current_user.edit_item(bucket_name, item_name, new_item_name, status)
+        return redirect(url_for('single_bucket',
+                                bucket_name=bucket_name))
+    else:
+        item = current_user.get_single_item(bucket_name, item_name)
+        return render_template('edit-item.html',
+                               bucket_name=bucket_name,
+                               activity_name=item_name,
+                               status=item.status)
 
 
 if __name__ == '__main__':

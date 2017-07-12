@@ -68,7 +68,7 @@ class User:
         bucket = self.get_bucket_from_name(bucket_name)
         bucket[0].items.append(item)
 
-    def edit_item(self, bucket_name, item_name, new_item_name):
+    def edit_item(self, bucket_name, item_name, new_item_name, status):
         """
         Edit an item in a bucket
         :param bucket_name: 
@@ -80,6 +80,7 @@ class User:
                 if item.name == item_name]
         if item:
             item[0].name = new_item_name
+            item[0].status = status
 
     def get_items(self, bucket_name):
         """
@@ -88,6 +89,11 @@ class User:
         """
         bucket = self.get_bucket_from_name(bucket_name)
         return bucket[0].items
+
+    def get_single_item(self, bucket_name, item_name):
+        bucket = self.get_bucket_from_name(bucket_name)
+        item = [item for item in bucket[0].items if item.name == item_name]
+        return item[0]
 
     def get_bucket_from_name(self, bucket_name):
         """
@@ -106,5 +112,3 @@ class User:
         bucket = self.get_bucket_from_name(bucket_name)
         item = [item for item in bucket[0].items if item.name == item_name]
         bucket[0].items.remove(item[0])
-
-

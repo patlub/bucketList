@@ -50,10 +50,10 @@
                         </label>
                     </td>
                     <td>
-                        <a href="http://localhost:5000/edit_activity/{{ bucket_name }}/{{ act.name }}">
+                        <a href="http://localhost:5000/edit_item/{{ bucket_name }}/{{ act.name }}">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="http://localhost:5000/del_activity/{{ bucket_name }}/{{ act.name }}">
+                        <a href="http://localhost:5000/del_item/{{ bucket_name }}/{{ act.name }}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>
@@ -61,14 +61,14 @@
             {% endfor %}
             <tr>
                 <td colspan="4"><input type="button" id="add-activity-btn" value="Add Activity+" data-toggle="modal"
-                                       data-target="#addActivityModal"></td>
+                                       data-target="#addItemModal"></td>
             </tr>
 
             </tbody>
         </table>
 
-        <!-- Add activity Modal -->
-        <div class="modal fade" id="addActivityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        <!-- Add item Modal -->
+        <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
              align="center">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -79,8 +79,8 @@
                         <h4 class="modal-title" id="myModalLabel">Add an Activity</h4>
                     </div>
                     <div class="modal-body">
-                        <form action="http://localhost:5000/create_activity/{{ bucket_name }}" method="post">
-                            <div><input type="text" name="activity-name" class="modal-text-box"
+                        <form action="http://localhost:5000/create_item/{{ bucket_name }}" method="post">
+                            <div><input type="text" name="item-name" class="modal-text-box"
                                         placeholder="Activity" required></div>
                             <div><input type="submit" id="create-bucket-btn" value="Add Activity"></div>
                         </form>
