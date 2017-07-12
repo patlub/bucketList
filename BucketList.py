@@ -105,5 +105,17 @@ def create_bucket():
     return redirect(url_for('buckets'))
 
 
+@app.route('/edit_bucket/<bucket_name>', methods=['POST'])
+def edit_bucket(bucket_name):
+    if 'email' not in session:
+        return redirect(url_for('sign_in'))
+    new_bucket_name = request.form['bucket-name']
+    new_description = request.form['description']
+    global current_user
+    if current_user.edit_bucket(bucket_name, new_bucket_name, new_description):
+        return redirect(url_for('items',
+                                bucket_name=new_bucket_name))
+
+
 if __name__ == '__main__':
     app.run()
