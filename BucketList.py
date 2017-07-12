@@ -116,6 +116,7 @@ def edit_bucket(bucket_name):
     return redirect(url_for('single_bucket',
                             bucket_name=new_bucket_name))
 
+
 @app.route('/buckets/<string:bucket_name>')
 def single_bucket(bucket_name):
     if 'id' not in session:
@@ -128,8 +129,13 @@ def single_bucket(bucket_name):
                            bucket_desc=bucket.description)
 
 
-
-
+@app.route('/del_bucket/<string:bucket_name>')
+def delete_bucket(bucket_name):
+    if 'id' not in session:
+        return redirect(url_for('sign_in'))
+    global current_user
+    current_user.delete_bucket(bucket_name)
+    return redirect(url_for('buckets'))
 
 
 if __name__ == '__main__':
