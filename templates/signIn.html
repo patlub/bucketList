@@ -10,22 +10,22 @@
 <body class="home-body">
 <div class="container-fluid">
     <div class="row"><h1 id="main-heading" class="text-center">MyBucket</h1></div>
-    <div id="sub-heading" class="text-right">
+    <div id="sub-heading" class="text-center">
         <p>
             Track Activities you wish to undertake.<br>
             Tick off what you have done.<br>
             And share the fun with your friends.
         </p>
     </div>
-    <div id="sign-up-box">
+    <div id="sign-up-box" class="col-md-4">
         <div id="sign-in-head-text" class="text-center">Sign in to continue</div>
         <div class=".error">{{ error }}</div>
         <form method="post" action="http://localhost:5000/signIn">
             <div><input type="email" name="email" class="text-box" placeholder="Email" required></div>
             <div><input type="password" name="password" class="text-box" placeholder="Password" required></div>
-            <div><input id="start-tracking-btn" type="submit" class="text-box" value="Sign In"></div>
-            <div id="sign-in-text" class="text-right">Not yet a member? <a
-                    href="http://localhost:5000/">Sign Up</a>
+            <div><input id="start-tracking-btn" type="submit" class="btn btn-lg btn-primary" value="Sign In"></div>
+            <div id="sign-in-text" class="text-right">Not yet a member? <span id="sign-up-link"><a
+                    href="http://localhost:5000/">Sign Up</a></span>
             </div>
         </form>
     </div>

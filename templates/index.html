@@ -10,24 +10,26 @@
 <body class="home-body">
 <div class="container-fluid">
     <div class="row"><h1 id="main-heading" class="text-center">MyBucket</h1></div>
-    <div id="sub-heading" class="text-right">
+    <div id="sub-heading" class="text-center">
         <p>
             Track Activities you wish to undertake.<br>
             Tick off what you have done.<br>
             And share the fun with your friends.
         </p>
     </div>
-    <div id="sign-up-box">
-        <div id="sign-up-text" class="text-center">Sign up to start tracking</div>
-        <form method="post" action="http://localhost:5000/signUp">
-            <div><input type="text" name="name" class="text-box" placeholder="Name" required></div>
-            <div><input type="email" name="email" class="text-box" placeholder="Email" required></div>
-            <div><input type="password" name="password" class="text-box" placeholder="Password" required></div>
-            <div><input id="start-tracking-btn" type="submit" class="text-box" value="Start Tracking"></div>
-            <div id="sign-in-text" class="text-right">Already a member? <a
-                    href="http://localhost:5000/signIn">SignIn</a>
-            </div>
-        </form>
+    <div align="center">
+        <div id="sign-up-box" class="col-md-4">
+            <div id="sign-up-text" class="text-center">Sign up to start tracking</div>
+            <form method="post" action="http://localhost:5000/signUp">
+                <div><input type="text" name="name" class="text-box" placeholder="Name" required></div>
+                <div><input type="email" name="email" class="text-box" placeholder="Email" required></div>
+                <div><input type="password" name="password" class="text-box" placeholder="Password" required></div>
+                <div><input id="start-tracking-btn" type="submit" class="btn btn-success btn-lg" value="Start Tracking"></div>
+                <div id="sign-in-text" class="text-right">Already a member? <span id="sign-in-link"><a
+                        href="http://localhost:5000/signIn">Sign In</a></span>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>
