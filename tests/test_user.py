@@ -98,6 +98,16 @@ class UserCase(unittest.TestCase):
         self.assertIsInstance(items, list)
         self.assertEqual(len(items), 2)
 
+    def test_delete_item_from_bucket(self):
+        """Should check if item is deleted from bucket"""
+        bucket_name = 'travel'
+        self.user.create_bucket(self.bucket)
+        self.user.add_item(bucket_name, self.item)
+        self.assertTrue([item for item in self.bucket.items if self.item.name == 'Kampala'])
+        self.user.delete_item(bucket_name, self.item.name)
+        self.assertFalse([item for item in self.bucket.items if self.item.name == 'Kampala'])
+
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -88,4 +88,3 @@ class User:
     def get_bucket_from_name(self, bucket_name):
         return [bucket for bucket in self.buckets
                 if bucket.name == bucket_name]
-
