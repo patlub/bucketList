@@ -88,3 +88,10 @@ class User:
     def get_bucket_from_name(self, bucket_name):
         return [bucket for bucket in self.buckets
                 if bucket.name == bucket_name]
+
+    def delete_item(self, bucket_name, item_name):
+        bucket = self.get_bucket_from_name(bucket_name)
+        item = [item for item in bucket[0].items if item.name == item_name]
+        bucket[0].items.remove(item[0])
+
+
