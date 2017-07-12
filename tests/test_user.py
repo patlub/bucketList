@@ -95,7 +95,7 @@ class UserCase(unittest.TestCase):
         self.user.add_item(bucket_name, item1)
         self.user.add_item(bucket_name, item2)
         items = self.user.get_items(bucket_name)
-        self.assertIsInstance(len(items), list)
+        self.assertIsInstance(items, list)
         self.assertEqual(len(items), 2)
 
 

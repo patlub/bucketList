@@ -82,7 +82,8 @@ class User:
             item[0].name = new_item_name
 
     def get_items(self, bucket_name):
-        pass
+        bucket = self.get_bucket_from_name(bucket_name)
+        return bucket[0].items
 
     def get_bucket_from_name(self, bucket_name):
         return [bucket for bucket in self.buckets
