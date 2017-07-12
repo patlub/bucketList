@@ -2,6 +2,7 @@
 ![Patrick Luboobi](https://img.shields.io/badge/Patrick%20Luboobi-BucketList-green.svg)
 [![Build Status](https://travis-ci.org/patlub/bucketList.svg?branch=master)](https://travis-ci.org/patlub/bucketList)
 [![Coverage Status](https://coveralls.io/repos/github/patlub/bucketList/badge.svg)](https://coveralls.io/github/patlub/bucketList)
+[![Code Climate](https://codeclimate.com/github/patlub/bucketList/badges/gpa.svg)](https://codeclimate.com/github/patlub/bucketList)
 [![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
 

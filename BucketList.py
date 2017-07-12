@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, url_for, session, flash
+from flask import Flask, render_template,\
+    request, redirect, url_for, session, flash
 from classes.user import User
 from classes.bucket import Bucket
 from classes.item import Item
@@ -112,7 +113,8 @@ def edit_bucket(bucket_name):
     new_bucket_name = request.form['bucket-name']
     new_description = request.form['description']
     global current_user
-    current_user.edit_bucket(bucket_name, new_bucket_name, new_description)
+    current_user.edit_bucket(bucket_name,
+                             new_bucket_name, new_description)
     return redirect(url_for('single_bucket',
                             bucket_name=new_bucket_name))
 
@@ -125,7 +127,7 @@ def single_bucket(bucket_name):
     bucket = current_user.get_single_bucket(bucket_name)
     return render_template('items.html',
                            bucket_name=bucket_name,
-                           bucket_acts=bucket.items,
+                           bucket_items=bucket.items,
                            bucket_desc=bucket.description)
 
 
@@ -146,7 +148,8 @@ def create_item(bucket_name):
     new_item = Item(item_name)
     global current_user
     current_user.add_item(bucket_name, new_item)
-    return redirect(url_for('single_bucket', bucket_name=bucket_name))
+    return redirect(url_for('single_bucket',
+                            bucket_name=bucket_name))
 
 
 @app.route('/edit_item/<string:bucket_name>/'
@@ -156,10 +159,12 @@ def edit_item(item_name, bucket_name):
         return redirect(url_for('sign_in'))
     if request.method == 'POST':
         new_item_name = request.form['item-name']
-        status = request.form['status']
-
+        status = False
+        if 'status' in request.form:
+            status = request.form['status']
         global current_user
-        current_user.edit_item(bucket_name, item_name, new_item_name, status)
+        current_user.edit_item(bucket_name, item_name,
+                               new_item_name, status)
         return redirect(url_for('single_bucket',
                                 bucket_name=bucket_name))
     else:

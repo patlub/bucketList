@@ -24,7 +24,7 @@
         <div class="col-md-2">
             <a href="http://localhost:5000/del_bucket/{{ bucket_name }}">
                 <input type="button" id="delete-bucket-btn" value="Delete Bucket"
-                       onclick="confirm('Are you sure you want to delete this bucket')"/>
+                       onclick="return confirm('Are you sure you want to delete this bucket')"/>
             </a>
         </div>
     </div>
@@ -39,21 +39,26 @@
             </tr>
             </thead>
             <tbody>
-            {% for act in bucket_acts %}
+            {% for item in bucket_items %}
                 <tr>
-                    <td><a href="">{{ act.name }}</a></td>
+                    <td><a href="">{{ item.name }}</a></td>
                     <td>20-07-2017</td>
                     <td>
                         <label class="switch">
-                            <input type="checkbox">
+                            {% if item.status %}
+                                <input type="checkbox" checked disabled>
+                            {% else %}
+                                <input type="checkbox" disabled>
+                            {% endif %}
+
                             <span class="slider round"></span>
                         </label>
                     </td>
                     <td>
-                        <a href="http://localhost:5000/edit_item/{{ bucket_name }}/{{ act.name }}">
+                        <a href="http://localhost:5000/edit_item/{{ bucket_name }}/{{ item.name }}">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="http://localhost:5000/del_item/{{ bucket_name }}/{{ act.name }}">
+                        <a href="http://localhost:5000/del_item/{{ bucket_name }}/{{ item.name }}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>
