@@ -12,7 +12,7 @@ class User:
         self.buckets = []
         self.id = None
 
-    def create_bucket(self, bucket) -> bool:
+    def create_bucket(self, bucket):
         """
         Creates new bucket for user
         :param bucket: 

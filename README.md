@@ -13,3 +13,41 @@ What would you like to do in the next few years? Climb a mountain? Learn to ride
 important to keep track of what you have already done and what you are yet to achieve. In the
 next steps, we will work towards building a bucket list application that helps us record activities
 we wish to undertake, tick off what we have done and even invite our friends to have fun with us.
+
+### Requirements
+
+`Python 3+, python-pip, virtualenv`
+
+### Installation
+
+Clone the repo
+
+```
+$ git clone http://github.com/patlub/bucketList.git
+$ cd bucketList
+```
+
+### Create a virtualenv, and activate it:
+
+```
+$ virtualenv env 
+$ source env/bin/activate
+```
+
+### After, install all necessary to run:
+
+```
+$ pip install -r requirements.txt
+```
+
+### Than, run the application:
+
+```
+$ python run.py
+```
+
+### To see your application, access this url in your browser:
+
+```
+http://localhost:5000
+```

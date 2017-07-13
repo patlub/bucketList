@@ -23,6 +23,14 @@ class AppTestCase(unittest.TestCase):
         self.assertEqual(self.app.all_users[index].password,
                          'password')
 
+    def test_sign_up_with_exisiting_email(self):
+        """Should test that user can sign up with same email"""
+        self.app.sign_up(self.user)
+        self.assertFalse(self.app.sign_up(self.user))
+        self.user = User('luboobi@gmail.com', 'password', 'Patrick')
+        self.assertTrue(self.app.sign_up(self.user))
+
+
     def test_sign_in_to_app(self):
         self.app.sign_up(self.user)
         self.assertTrue(self.app.sign_in(self.user),

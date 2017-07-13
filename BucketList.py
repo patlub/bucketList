@@ -197,6 +197,7 @@ def edit_item(item_name, bucket_name):
                                activity_name=item_name,
                                status=item.status)
 
+
 @app.route('/del_item/<string:bucket_name>/'
            '<string:item_name>')
 def del_item(item_name, bucket_name):
@@ -206,7 +207,6 @@ def del_item(item_name, bucket_name):
     current_user.delete_item(bucket_name, item_name)
     return redirect(url_for('single_bucket',
                             bucket_name=bucket_name))
-
 
 
 if __name__ == '__main__':
