@@ -60,7 +60,7 @@
             {% for item in bucket_items %}
                 <tr>
                     <td><a href="">{{ item.name }}</a></td>
-                    <td>20-07-2017</td>
+                    <td>{{ item.date_added }}</td>
                     <td>
                         {% if item.status %}
                             <span class="glyphicon glyphicon-ok" style="color: green;"></span>

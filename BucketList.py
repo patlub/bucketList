@@ -1,3 +1,6 @@
+from datetime import time, date
+from time import strftime, gmtime
+
 from flask import Flask, render_template, \
     request, redirect, url_for, session, flash
 from classes.user import User
@@ -161,7 +164,8 @@ def create_item(bucket_name):
     if 'id' not in session:
         return redirect(url_for('sign_in'))
     item_name = request.form['item-name']
-    new_item = Item(item_name)
+    date_added = strftime("%Y-%m-%d", gmtime())
+    new_item = Item(item_name, date_added)
     global current_user
     current_user.add_item(bucket_name, new_item)
     return redirect(url_for('single_bucket',
@@ -199,6 +203,11 @@ def edit_item(item_name, bucket_name):
 @app.route('/del_item/<string:bucket_name>/'
            '<string:item_name>')
 def del_item(item_name, bucket_name):
+    """
+    Deletes an item from a bucket
+    :param item_name: 
+    :param bucket_name: 
+    """
     if 'id' not in session:
         return redirect(url_for('sign_in'))
     global current_user

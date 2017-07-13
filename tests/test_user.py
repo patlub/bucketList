@@ -1,4 +1,6 @@
 import unittest
+from time import strftime, gmtime
+
 from classes.user import User
 from classes.bucket import Bucket
 from classes.item import Item
@@ -7,9 +9,10 @@ from classes.item import Item
 class UserCase(unittest.TestCase):
     @classmethod
     def setUp(self):
+        date_added = strftime("%Y-%m-%d", gmtime())
         self.user = User('patrick@gmail.com', 'password', 'Patrick')
         self.bucket = Bucket('travel', 'cities', 2)
-        self.item = Item('Kampala')
+        self.item = Item('Kampala', date_added)
 
     def test_user_created(self):
         """Should test that user is created successfully"""
@@ -86,9 +89,10 @@ class UserCase(unittest.TestCase):
 
     def test_get_items_in_bucket(self):
         """Should check if bucket items are well fetched"""
+        date_added = strftime("%Y-%m-%d", gmtime())
         bucket_name = 'travel'
-        item1 = Item('Kampala')
-        item2 = Item('Nairobi')
+        item1 = Item('Kampala', date_added)
+        item2 = Item('Nairobi', date_added)
 
         self.user.create_bucket(self.bucket)
         self.user.add_item(bucket_name, item1)
