@@ -8,6 +8,11 @@ class App:
         Signs up a user to the app
         :param user: 
         """
+
+        if [existing_user for existing_user in self.all_users
+            if existing_user.email == user.email]:
+            return False
+
         if self.all_users:
             id = self.all_users[len(self.all_users) - 1].id + 1
             user.id = id
@@ -16,13 +21,14 @@ class App:
         self.all_users.append(user)
         return user.id
 
-    def sign_in(self, user) -> bool:
+    def sign_in(self, user):
         """
         signs in a user to the app
         :param user: 
         """
+
         for existing_user in self.all_users:
-            if existing_user.name == user.name and existing_user.email == user.email:
+            if existing_user.email == user.email and existing_user.password == user.password:
                 return existing_user.id
         return False
 
