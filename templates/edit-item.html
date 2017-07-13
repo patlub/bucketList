@@ -16,7 +16,7 @@
             <h3>Edit Activity</h3>
         </div>
         <div class="col-md-8">
-            <form method="post" action="http://localhost:5000/edit_item/{{ bucket_name }}/{{ activity_name }}">
+            <form method="post" action="/edit_item/{{ bucket_name }}/{{ activity_name }}">
                 <div class="form-group"><input type="text" name="item-name" class="form-control" value="{{ activity_name }}" required></div>
                 <div><label for="status">Accomplished</label>
                     {% if status %}

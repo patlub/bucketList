@@ -47,7 +47,7 @@
                     <h4 class="modal-title" id="myModalLabel">Create new Bucket</h4>
                 </div>
                 <div class="modal-body">
-                    <form method="post" action="http://localhost:5000/create_bucket">
+                    <form method="post" action="/create_bucket">
                         <div class="form-group"><input type="text" name="bucket-name" class="form-control"
                                                        placeholder="Bucket Name" required></div>
                         <div class="form-group"><textarea name="description" class="form-control"
@@ -66,7 +66,7 @@
             {% for bucket in buckets %}
                 {% set achieved = 0 %}
                 {% set pending = 0 %}
-                <a href="http://localhost:5000/buckets/{{ bucket.name }}">
+                <a href="/buckets/{{ bucket.name }}">
                     <div id="bucket-1" class="col-md-2 bucket">
                         <div class="bucket-name">{{ bucket.name }}</div>
                         {% for item in bucket.items %}
