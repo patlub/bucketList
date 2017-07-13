@@ -20,6 +20,7 @@
     <div align="center">
         <div id="sign-up-box" class="col-md-4">
             <div id="sign-up-text" class="text-center">Sign up to start tracking</div>
+            <div class="error">{{ error }}</div>
             <form method="post" action="http://localhost:5000/signUp">
                 <div><input type="text" name="name" class="text-box" placeholder="Name" required></div>
                 <div><input type="email" name="email" class="text-box" placeholder="Email" required></div>
