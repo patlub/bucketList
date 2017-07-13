@@ -53,7 +53,6 @@ class UserCase(unittest.TestCase):
         bucket = self.user.get_single_bucket('travel')
         self.assertEqual(bucket.name, 'travel')
         self.assertEqual(bucket.description, 'cities')
-        self.assertEqual(bucket.id, 2)
 
     def test_delete_bucket(self):
         """Should check if bucket is deleted by user"""
@@ -82,7 +81,7 @@ class UserCase(unittest.TestCase):
         self.user.add_item(bucket_name, self.item)
         index = len(self.bucket.items) - 1
         self.assertEqual(self.bucket.items[index].name, 'Kampala')
-        self.user.edit_item(bucket_name, item_name, new_item_name)
+        self.user.edit_item(bucket_name, item_name, new_item_name, True)
         self.assertEqual(self.bucket.items[index].name, 'NewYork')
 
     def test_get_items_in_bucket(self):
