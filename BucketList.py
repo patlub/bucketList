@@ -46,11 +46,16 @@ def sign_in():
         # Pick form values
         email = request.form['email']
         password = request.form['password']
-        global current_user
-        current_user = User(email, password)
+        user = User(email, password)
         # start session
-        session['id'] = bucketApp.sign_in(current_user)
+        session['id'] = bucketApp.sign_in(user)
+
         if session['id']:
+            global current_user
+            user = [user for user in bucketApp.all_users
+                    if user.id == session['id']]
+            current_user = user[0]
+
             return redirect(url_for('buckets'))
         return render_template('signIn.html',
                                error='Invalid username or password')
@@ -75,22 +80,15 @@ def buckets():
 
     if 'id' not in session:
         return redirect(url_for('sign_in'))
-
-    user = [user for user in bucketApp.all_users
-            if user.id == session['id']]
-    if user:
-        # return render_template('buckets.html',
-        return render_template('buckets.html',
-                               buckets=user[0].get_buckets())
-    else:
-        return redirect(url_for('sign_in'))
+    global current_user
+    return render_template('buckets.html',
+                           buckets=current_user.get_buckets())
 
 
 @app.route('/create_bucket', methods=["POST"])
 def create_bucket():
     """
-    Creates a new bucket list
-    :return: 
+    Creates a new bucket list 
     """
 
     # Check user is signed in

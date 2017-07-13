@@ -88,7 +88,7 @@ class UserCase(unittest.TestCase):
         """Should check if bucket items are well fetched"""
         bucket_name = 'travel'
         item1 = Item('Kampala')
-        item2= Item('Nairobi')
+        item2 = Item('Nairobi')
 
         self.user.create_bucket(self.bucket)
         self.user.add_item(bucket_name, item1)
@@ -102,10 +102,11 @@ class UserCase(unittest.TestCase):
         bucket_name = 'travel'
         self.user.create_bucket(self.bucket)
         self.user.add_item(bucket_name, self.item)
-        self.assertTrue([item for item in self.bucket.items if self.item.name == 'Kampala'])
+        self.assertTrue([item for item in self.bucket.items
+                         if self.item.name == 'Kampala'])
         self.user.delete_item(bucket_name, self.item.name)
-        self.assertFalse([item for item in self.bucket.items if self.item.name == 'Kampala'])
-
+        self.assertFalse([item for item in self.bucket.items
+                          if self.item.name == 'Kampala'])
 
 
 if __name__ == '__main__':
