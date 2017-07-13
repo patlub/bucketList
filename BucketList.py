@@ -197,14 +197,14 @@ def edit_item(item_name, bucket_name):
                                activity_name=item_name,
                                status=item.status)
 
-@app.route('/del_activity/<string:bucket_name>/'
+@app.route('/del_item/<string:bucket_name>/'
            '<string:item_name>')
 def del_item(item_name, bucket_name):
     if 'id' not in session:
         return redirect(url_for('sign_in'))
     global current_user
-    current_user.delete_bucket(bucket_name, item_name)
-    return redirect(url_for('items',
+    current_user.delete_item(bucket_name, item_name)
+    return redirect(url_for('single_bucket',
                             bucket_name=bucket_name))
 
 

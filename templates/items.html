@@ -69,7 +69,7 @@
                         <a href="http://localhost:5000/edit_item/{{ bucket_name }}/{{ item.name }}">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a>
-                        <a href="http://localhost:5000/del_item/{{ bucket_name }}/{{ item.name }}">
+                        <a onclick="return confirm('Are you sure you want to delete this item')" href="http://localhost:5000/del_item/{{ bucket_name }}/{{ item.name }}">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </td>
