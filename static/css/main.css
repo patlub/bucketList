@@ -81,11 +81,7 @@
 }
 
 #edit-bucket-btn {
-    background-color: #0000ff;
-    color: #ffffff;
-    font-size: 140%;
-    width: 70%;
-    margin-top: 7%;
+    width: 100%;
 }
 
 #create-bucket {
@@ -168,12 +164,7 @@
 }
 
 #create-bucket-btn {
-    width: 70%;
-    height: 35px;
-    font-size: 150%;
-    margin-top: 5%;
-    background-color: green;
-    color: #ffffff;
+    width: 100%;
 }
 
 #e-bucket-btn {

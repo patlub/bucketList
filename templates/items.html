@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/toggle.css">
     <link rel="stylesheet" type="text/css" href="../static/css/main.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -12,23 +12,38 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="col-md-12"><h1><strong>MyBucket</strong></h1></div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#" style="color: green;font-size: 250%">BucketList</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <button type="button" class="btn btn-danger pull-right" style="margin-top: 1%;">Sign Out</button>
+
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
     <div class="row">
-        <div id="bucket-lists-heading" class="col-md-8"><h2>
+        <div id="bucket-lists-heading" class="col-md-5"><h2>
             <a href="http://localhost:5000/buckets"><em>Buckets</em></a> / {{ bucket_name }}</h2>
         </div>
-        <div class="col-md-2">
-            <input type="button" id="e-bucket-btn" value="Edit Bucket" data-toggle="modal"
-                   data-target="#editBucketModal"/>
-        </div>
-        <div class="col-md-2">
-            <a href="http://localhost:5000/del_bucket/{{ bucket_name }}">
-                <input type="button" id="delete-bucket-btn" value="Delete Bucket"
-                       onclick="return confirm('Are you sure you want to delete this bucket')"/>
-            </a>
+        <div class="col-md-4">
+            <button type="button" class="btn btn-warning pull-right"
+                    onclick="return confirm('Are you sure you want to delete this bucket')"
+                    style="margin-top: 3%;margin-right: 1%;">Delete Bucket
+            </button>
+            <button type="button" class="btn btn-primary pull-right" style="margin-top: 3%;margin-right: 1%;"
+                    data-toggle="modal"
+                    data-target="#editBucketModal">Edit Bucket
+            </button>
         </div>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-10">
         <table class="table table-bordered table-striped table-responsive">
             <thead>
             <tr>
@@ -85,9 +100,10 @@
                     </div>
                     <div class="modal-body">
                         <form action="http://localhost:5000/create_item/{{ bucket_name }}" method="post">
-                            <div><input type="text" name="item-name" class="modal-text-box"
-                                        placeholder="Activity" required></div>
-                            <div><input type="submit" id="create-bucket-btn" value="Add Activity"></div>
+                            <div class="form-group"><textarea name="item-name" class="form-control"
+                                                              placeholder="Activity" required></textarea></div>
+                            <div><input type="submit" id="create-bucket-btn" class="btn btn-primary"
+                                        value="Add Activity"></div>
                         </form>
                     </div>
                 </div>
@@ -107,11 +123,13 @@
                     </div>
                     <div class="modal-body">
                         <form action="http://localhost:5000/edit_bucket/{{ bucket_name }}" method="post">
-                            <div><input type="text" name="bucket-name" class="modal-text-box"
-                                        placeholder="Bucket Name" value="{{ bucket_name }}" required></div>
-                            <div><input type="text" name="description" class="modal-text-box"
-                                        placeholder="Description" value="{{ bucket_desc }}" required></div>
-                            <div><input type="submit" id="edit-bucket-btn" value="Update"></div>
+                            <div class="form-group"><input type="text" name="bucket-name" class="form-control"
+                                                           placeholder="Bucket Name" value="{{ bucket_name }}" required>
+                            </div>
+                            <div class="form-group"><input type="text" name="description" class="form-control"
+                                                           placeholder="Description" value="{{ bucket_desc }}" required>
+                            </div>
+                            <div><input type="submit" class="btn btn-primary" id="edit-bucket-btn" value="Update"></div>
                         </form>
                     </div>
                 </div>

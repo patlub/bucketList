@@ -71,12 +71,14 @@ def buckets():
     """ 
     Returns list of all buckets   
     """
+
     if 'id' not in session:
         return redirect(url_for('sign_in'))
 
     user = [user for user in bucketApp.all_users
             if user.id == session['id']]
     if user:
+        # return render_template('buckets.html',
         return render_template('buckets.html',
                                buckets=user[0].get_buckets(),
                                len=len(user[0].get_buckets()))
