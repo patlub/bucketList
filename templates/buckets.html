@@ -24,7 +24,9 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
 
-                <a href="/signOut"><button type="button" class="btn btn-danger pull-right" style="margin-top: 1%;">Sign Out</button></a>
+                <a href="/signOut">
+                    <button type="button" class="btn btn-danger pull-right" style="margin-top: 1%;">Sign Out</button>
+                </a>
                 <button type="button" class="btn btn-primary pull-right" style="margin-top: 1%;margin-right: 1%;"
                         data-toggle="modal"
                         data-target="#addBucketModal">Create Bucket
@@ -70,15 +72,14 @@
                     <div id="bucket-1" class="col-md-2 bucket">
                         <div class="bucket-name">{{ bucket.name }}</div>
                         {% for item in bucket.items %}
-                            {% if item.status %}
+                            {% if item.status == true %}
                                 {% set achieved = achieved + 1 %}
                             {% else %}
                                 {% set pending = pending + 1 %}
                             {% endif %}
                         {% endfor %}
-                        <div class="bucket-label">Activities {{ bucket.items|length }}</div>
-                        <div class="bucket-label">Achieved {{ achieved }}</div>
-                        <div class="bucket-label">Pending {{ pending }}</div>
+                        <div class="bucket-label">Items: {{ bucket.items|length }}</div>
+
                     </div>
                 </a>
             {% endfor %}
