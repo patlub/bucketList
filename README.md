@@ -14,6 +14,28 @@ important to keep track of what you have already done and what you are yet to ac
 next steps, we will work towards building a bucket list application that helps us record activities
 we wish to undertake, tick off what we have done and even invite our friends to have fun with us.
 
+### Functions
+
+* Sign Up User
+
+* Sign In User
+
+* Add Bucket
+
+* View Buckets
+
+* Edit Bucket
+
+* Delete Bucket
+
+* Add Item to Bucket
+
+* View items added to Bucket
+
+* Edit Item in Bucket
+
+* Delete Item from Bucket
+
 ### Requirements
 
 `Python 3+, python-pip, virtualenv`
@@ -43,7 +65,7 @@ $ pip install -r requirements.txt
 ### Than, run the application:
 
 ```
-$ python run.py
+$ python BucketList.py
 ```
 
 ### To see your application, access this url in your browser:
