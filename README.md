@@ -62,7 +62,7 @@ $ source env/bin/activate
 $ pip install -r requirements.txt
 ```
 
-### Than, run the application:
+### Then, run the application:
 
 ```
 $ python BucketList.py
